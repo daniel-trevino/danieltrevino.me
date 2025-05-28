@@ -1,17 +1,17 @@
 {
-  "name": "kitchen-sink",
+  "name": "mastra-scaffold",
   "private": true,
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev": "turbo run dev",
+    "dev": "dotenv -c -- turbo dev --concurrency 15",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "turbo run lint",
     "test": "turbo run test",
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
-    "prettier": "^3.5.3",
+    "@biomejs/biome": "1.9.4",
+    "dotenv-cli": "^8.0.0",
     "turbo": "^2.5.3"
   },
   "packageManager": "pnpm@8.15.6",
