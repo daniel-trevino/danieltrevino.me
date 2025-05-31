@@ -1,11 +1,15 @@
-import { CopilotKitComponent } from "../components/CopilotKit";
+import { RuntimeProvider } from "@/components/RuntimeProvider";
+import { AssistantUI } from "@/components/assistant-ui";
 import "./styles.css";
 
 function App() {
 	return (
-		<div className="container">
-			<CopilotKitComponent />
-		</div>
+		<RuntimeProvider>
+			<div className="container">
+				<AssistantUI />
+				{/* <CopilotKitComponent /> */}
+			</div>
+		</RuntimeProvider>
 	);
 }
 

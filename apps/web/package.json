@@ -9,19 +9,37 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.3.22",
+    "@assistant-ui/react": "^0.10.19",
+    "@assistant-ui/react-ai-sdk": "^0.10.13",
+    "@assistant-ui/react-markdown": "^0.10.4",
     "@copilotkit/react-core": "^1.8.13",
     "@copilotkit/react-ui": "^1.8.13",
-    "@repo/ui": "workspace:*",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.7",
+    "@tailwindcss/postcss": "^4.1.8",
+    "ai": "^4.3.16",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.511.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@repo/typescript-config": "workspace:*",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@tailwindcss/vite": "^4.1.8",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react": "^4.5.0",
-    "typescript": "5.8.2",
-    "vite": "^5.4.14"
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8",
+    "tw-animate-css": "^1.3.2",
+    "typescript": "5.8.3",
+    "vite": "^6.3.5",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
