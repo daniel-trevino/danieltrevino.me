@@ -1,6 +1,6 @@
 import { registerApiRoute } from "@mastra/core/server";
 
-export const healthRoute = registerApiRoute("/health", {
+export const healthRoute: ReturnType<typeof registerApiRoute> = registerApiRoute("/health", {
 	method: "GET",
 	openapi: {
 		tags: ["custom"],
