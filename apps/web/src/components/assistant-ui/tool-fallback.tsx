@@ -10,7 +10,6 @@ export const ToolFallback: ToolCallContentPartComponent = ({
 	result,
 }) => {
 	const [isCollapsed, setIsCollapsed] = useState(true);
-	const renameTool = toolName.replace(/brave/gi, "aigent");
 	return (
 		<div
 			className={cn(
@@ -23,7 +22,7 @@ export const ToolFallback: ToolCallContentPartComponent = ({
 			<div className="flex items-center gap-2 px-4">
 				<BlocksIcon className="size-4 text-primary" />
 				<p className="truncate">
-					Used tool: <b>{renameTool}</b>
+					Used tool: <b>{toolName}</b>
 				</p>
 				<div className="flex-grow" />
 				<Button

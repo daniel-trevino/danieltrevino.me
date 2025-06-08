@@ -9,11 +9,11 @@ type DownloadCVResult = {
 	rawText: string;
 };
 
-export const DownloadCVTool = makeAssistantToolUI<
+export const ShareCVTool = makeAssistantToolUI<
 	DownloadCVArgs,
 	DownloadCVResult
 >({
-	toolName: "downloadCvTool",
+	toolName: "shareCvTool",
 	render: ({ args, status, result }) => {
 		if (status.type === "running") {
 			return (

@@ -1,9 +1,11 @@
-import { DownloadCVTool } from "./DownloadCVTool";
+import { BraveWebSearchTool } from "./BraveWebSearch";
+import { ShareCVTool } from "./ShareCVTool";
 
 export const ChatTools = () => {
 	return (
 		<>
-			<DownloadCVTool />
+			<ShareCVTool />
+			<BraveWebSearchTool />
 		</>
 	);
 };
