@@ -4,6 +4,9 @@ import { MCPClient } from "@mastra/mcp";
 import { memory } from "../lib/memory";
 import { RAG_QUERY_TOOL, RAG_STATS_TOOL } from "../tools/rag-query";
 import { SHARE_CV_TOOL } from "../tools/share-cv";
+import { SHARE_GITHUB_TOOL } from "../tools/share-github";
+import { SHARE_LINKEDIN_TOOL } from "../tools/share-linkedin";
+import { SHARE_X_TOOL } from "../tools/share-x";
 
 const mcp = new MCPClient({
     servers: {
@@ -80,6 +83,9 @@ export const assistantAgent = new Agent({
             shareCvTool: SHARE_CV_TOOL,
             queryDocuments: RAG_QUERY_TOOL,
             getDocumentStats: RAG_STATS_TOOL,
+            shareLinkedinTool: SHARE_LINKEDIN_TOOL,
+            shareGithubTool: SHARE_GITHUB_TOOL,
+            shareXTool: SHARE_X_TOOL,
         };
     },
 });
