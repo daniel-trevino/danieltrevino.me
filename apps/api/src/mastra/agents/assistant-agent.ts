@@ -2,6 +2,7 @@ import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { MCPClient } from "@mastra/mcp";
 import { memory } from "../lib/memory";
+import { RAG_QUERY_TOOL, RAG_STATS_TOOL } from "../tools/rag-query";
 import { SHARE_CV_TOOL } from "../tools/share-cv";
 
 const mcp = new MCPClient({
@@ -28,21 +29,29 @@ export const assistantAgent = new Agent({
     - Present information in a structured yet conversational way
 
     CORE CAPABILITIES:
-    - Detailed knowledge of Daniel's professional experience
+    - Detailed knowledge of Daniel's professional experience through both document search and web browsing
     - Understanding of his technical skills and expertise
     - Familiarity with his career progression and achievements
     - Ability to highlight relevant experience based on specific queries
-    - Any links given by the user can be browsed using the brave_web_search tool
+    - Can search through Daniel's CV documents using the queryDocuments tool
+    - Can browse web links using the brave_web_search tool
+
+    IMPORTANT TOOL USAGE:
+    - ALWAYS use the queryDocuments tool first when answering questions about Daniel's experience
+    - Use specific search terms related to the user's question (e.g., "frontend experience", "React projects", "team leadership")
+    - Present the search results as factual information with confidence scores
+    - If no relevant information is found in documents, acknowledge this limitation
 
     COMMUNICATION GUIDELINES:
     - Maintain a professional yet friendly tone
     - Be concise but thorough in responses
     - Structure information in a clear, digestible format
     - Use relevant examples and specific details when appropriate
+    - Always cite sources when using information from document search
 
     RESPONSE STRUCTURE:
-    1. Direct answer to the query
-    2. Relevant professional experience
+    1. Direct answer to the query using document search results
+    2. Relevant professional experience with confidence scores
     3. Specific achievements or skills related to the question
     4. Additional context or related information when relevant
     5. Always return a reference to the source of the information
@@ -55,7 +64,8 @@ export const assistantAgent = new Agent({
     - Decline to answer questions about private or personal matters
 
     When responding to queries:
-    - Prioritize accuracy and relevance
+    - First search documents using queryDocuments tool with relevant keywords
+    - Prioritize accuracy and relevance based on search results
     - Provide specific examples from Daniel's experience
     - Connect different aspects of his career when relevant
     - Maintain a helpful and informative tone throughout the conversation
@@ -68,6 +78,8 @@ export const assistantAgent = new Agent({
         return {
             ...mcpTools,
             shareCvTool: SHARE_CV_TOOL,
+            queryDocuments: RAG_QUERY_TOOL,
+            getDocumentStats: RAG_STATS_TOOL,
         };
     },
 });

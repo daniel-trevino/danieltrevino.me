@@ -1,4 +1,5 @@
 import { BraveWebSearchTool } from "./BraveWebSearch";
+import { KnowledgeSearchTool } from "./KnowledgeSearch";
 import { ShareCVTool } from "./ShareCVTool";
 
 export const ChatTools = () => {
@@ -6,6 +7,7 @@ export const ChatTools = () => {
 		<>
 			<ShareCVTool />
 			<BraveWebSearchTool />
+			<KnowledgeSearchTool />
 		</>
 	);
 };

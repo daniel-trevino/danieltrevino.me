@@ -20,7 +20,7 @@ export const BraveWebSearchTool = makeAssistantToolUI<
 	BraveWebSearchResult
 >({
 	toolName: "brave-search_brave_web_search",
-	render: ({ args, status, result }) => {
+	render: ({ args, status }) => {
 		const Component = ({ isLoading }: { isLoading: boolean }) => {
 			return (
 				<div className="rounded-lg border bg-card p-2 md:p-6 shadow-sm my-2">
