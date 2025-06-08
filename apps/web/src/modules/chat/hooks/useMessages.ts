@@ -16,7 +16,7 @@ export const useMessages = (threadIdProp?: string) => {
         method: "POST",
         body: JSON.stringify({ agentId, threadId, resourceId }),
       }).then((res) => res.json()),
-    enabled: !!threadId && pathname !== "/", // Only run query if we have a threadId and not on root page
+    enabled: !!threadId,
   });
 
   return { messages, isLoading, refetch };
