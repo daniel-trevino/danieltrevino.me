@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
-import { ragSystem } from "rag-system";
 import { z } from "zod";
+import { ragSystem } from "../../rag-system";
 
 export const RAG_QUERY_TOOL = createTool({
   id: "queryDocuments",
