@@ -8,6 +8,7 @@ import {
     getXUrl,
 } from "@repo/tools";
 import { memory } from "../lib/memory";
+import { crawlWebpageTool } from "../tools/crawl-webpage";
 import { getGithubUrlTool } from "../tools/get-github-url";
 import { getLinkedinUrlTool } from "../tools/get-linkedin-url";
 import { getResumeUrlTool } from "../tools/get-resume-url";
@@ -16,13 +17,13 @@ import { RAG_QUERY_TOOL } from "../tools/rag-query";
 
 const mcp = new MCPClient({
     servers: {
-        "brave-search": {
-            command: "npx",
-            args: ["-y", "@modelcontextprotocol/server-brave-search"],
-            env: {
-                BRAVE_API_KEY: process.env.BRAVE_API_KEY || "",
-            },
-        },
+        // "brave-search": {
+        //     command: "npx",
+        //     args: ["-y", "@modelcontextprotocol/server-brave-search"],
+        //     env: {
+        //         BRAVE_API_KEY: process.env.BRAVE_API_KEY || "",
+        //     },
+        // },
     },
 });
 
@@ -36,6 +37,7 @@ export const assistantAgent = new Agent({
     - Provide comprehensive information about his professional background
     - Engage in natural conversations about his career and expertise
     - Present information in a structured yet conversational way
+    - Any link that is given to you, you should use the crawl_webpage tool to crawl the url(s) and get the information you need.
 
     CORE CAPABILITIES:
     - Detailed knowledge of Daniel's professional experience through both document search and web browsing
@@ -43,7 +45,6 @@ export const assistantAgent = new Agent({
     - Familiarity with his career progression and achievements
     - Ability to highlight relevant experience based on specific queries
     - Can search through Daniel's CV documents using the queryDocuments tool
-    - Can browse web links using the brave_web_search tool
 
     IMPORTANT TOOL USAGE:
     - ALWAYS use the queryDocuments tool first when answering questions about Daniel's experience
@@ -90,6 +91,7 @@ export const assistantAgent = new Agent({
             [getLinkedinUrl.id]: getLinkedinUrlTool,
             [getXUrl.id]: getXUrlTool,
             [getResumeUrl.id]: getResumeUrlTool,
+            crawlWebpageTool,
             queryDocuments: RAG_QUERY_TOOL,
         };
     },
