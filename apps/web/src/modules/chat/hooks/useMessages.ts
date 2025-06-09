@@ -11,13 +11,17 @@ export const useMessages = (threadIdProp?: string) => {
 
   const { data: messages, isLoading, refetch } = useQuery({
     queryKey: ["messages", threadId],
-    queryFn: () =>
-      fetch("/api/message", {
+    queryFn: () => {
+      if (pathname === "/") {
+        return Promise.resolve([])
+      }
+      return fetch("/api/message", {
         method: "POST",
         body: JSON.stringify({ agentId, threadId, resourceId }),
-      }).then((res) => res.json()),
-    enabled: !!threadId && pathname !== "/",
+      }).then((res) => res.json())
+    },
+    enabled: !!threadId,
   });
 
-  return { messages: pathname === "/" ? [] : messages, isLoading, refetch };
+  return { messages, isLoading, refetch };
 };

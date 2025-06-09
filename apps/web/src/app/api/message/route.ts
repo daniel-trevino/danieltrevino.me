@@ -15,7 +15,6 @@ export async function POST(req: Request) {
     method: "GET",
   });
 
-
   if (response.status === 404) {
     return NextResponse.json([]);
   }
