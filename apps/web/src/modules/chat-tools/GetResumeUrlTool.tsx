@@ -60,7 +60,7 @@ export const GetResumeUrlTool = makeAssistantToolUI<
 						<FileUser className="h-6 w-6 text-primary" />
 					</div>
 					<div className="flex-1">
-						<h3 className="text-lg font-semibold">CV Download</h3>
+						<h3 className="text-lg font-semibold">Resume Download</h3>
 						<p className="text-sm text-muted-foreground">
 							✅ Ready to download
 						</p>

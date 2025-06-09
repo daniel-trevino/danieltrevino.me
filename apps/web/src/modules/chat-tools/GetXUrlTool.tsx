@@ -29,7 +29,7 @@ export const GetXUrlTool = makeAssistantToolUI<
 
 		return (
 			<div
-				className="rounded-lg border bg-white p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md"
+				className="rounded-lg border bg-white p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md mb-4"
 				style={{ borderColor: "#000000" }}
 			>
 				<div className="flex flex-col items-center justify-center mr-4">

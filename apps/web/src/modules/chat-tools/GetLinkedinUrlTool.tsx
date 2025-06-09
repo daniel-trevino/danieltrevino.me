@@ -1,7 +1,7 @@
 "use client";
 import { Icons } from "@/components/icons";
 import { makeAssistantToolUI } from "@assistant-ui/react";
-import type { getLinkedinUrl } from "@repo/tools/get-linkedin-url";
+import { getLinkedinUrl } from "@repo/tools/get-linkedin-url";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import type { z } from "zod";
@@ -10,7 +10,7 @@ export const GetLinkedinUrlTool = makeAssistantToolUI<
 	z.infer<typeof getLinkedinUrl.inputSchema>,
 	z.infer<typeof getLinkedinUrl.outputSchema>
 >({
-	toolName: "shareLinkedinTool",
+	toolName: getLinkedinUrl.id,
 	render: ({ status, result }) => {
 		if (status.type === "running") {
 			return (
@@ -29,7 +29,7 @@ export const GetLinkedinUrlTool = makeAssistantToolUI<
 
 		return (
 			<div
-				className="rounded-lg border bg-white p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md"
+				className="rounded-lg border bg-white p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md mb-4"
 				style={{ borderColor: "#0288D1" }}
 			>
 				<div className="flex flex-col items-center justify-center mr-4">

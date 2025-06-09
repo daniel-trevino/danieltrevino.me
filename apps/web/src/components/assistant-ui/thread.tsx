@@ -23,6 +23,7 @@ import type { FC } from "react";
 import { MarkdownText } from "@/components/assistant-ui/markdown-text";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/components/ui/button";
+import { WordRotate } from "../magicui/word-rotate";
 import { ToolFallback } from "./tool-fallback";
 
 export const Thread: FC = () => {
@@ -34,24 +35,40 @@ export const Thread: FC = () => {
 			}}
 		>
 			<ThreadPrimitive.Viewport className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-4">
-				<ThreadWelcome />
-
-				<ThreadPrimitive.Messages
-					components={{
-						UserMessage: UserMessage,
-						EditComposer: EditComposer,
-						AssistantMessage: AssistantMessage,
-					}}
-				/>
-
+				{/* Messages for non-empty threads */}
 				<ThreadPrimitive.If empty={false}>
+					<ThreadPrimitive.Messages
+						components={{
+							UserMessage: UserMessage,
+							EditComposer: EditComposer,
+							AssistantMessage: AssistantMessage,
+						}}
+					/>
 					<div className="min-h-8 flex-grow" />
 				</ThreadPrimitive.If>
 
-				<div className="sticky bottom-0 mt-3 flex w-full max-w-[var(--thread-max-width)] flex-col items-center justify-end rounded-t-lg bg-inherit pb-4">
-					<ThreadScrollToBottom />
-					<Composer />
-				</div>
+				{/* Empty thread layout - centered welcome and input */}
+				<ThreadPrimitive.If empty>
+					<div className="flex h-full w-full max-w-[var(--thread-max-width)] flex-col">
+						<div className="flex flex-grow flex-col items-center justify-center">
+							<ThreadWelcome />
+							<div className="mt-8 w-full">
+								<Composer />
+							</div>
+							<div className="mt-6 w-full">
+								<ThreadWelcomeSuggestions />
+							</div>
+						</div>
+					</div>
+				</ThreadPrimitive.If>
+
+				{/* Normal composer for non-empty threads */}
+				<ThreadPrimitive.If empty={false}>
+					<div className="sticky bottom-0 mt-3 flex w-full max-w-[var(--thread-max-width)] flex-col items-center justify-end rounded-t-lg bg-inherit pb-4">
+						<ThreadScrollToBottom />
+						<Composer />
+					</div>
+				</ThreadPrimitive.If>
 			</ThreadPrimitive.Viewport>
 		</ThreadPrimitive.Root>
 	);
@@ -72,55 +89,48 @@ const ThreadScrollToBottom: FC = () => {
 };
 
 const ThreadWelcome: FC = () => {
+	const messages = [
+		"Your shortcut to understanding my qualifications.",
+		"Curious about my background? Start a chat.",
+		"Everything you need to know—one message away.",
+		"Want to know what I've worked on?",
+		"Explore my skills and story, ask anything.",
+		"Got more questions before hiring me? Ask anything.",
+	];
 	return (
-		<ThreadPrimitive.Empty>
-			<div className="flex w-full max-w-[var(--thread-max-width)] flex-grow flex-col">
-				<div className="flex w-full flex-grow flex-col items-center justify-center">
-					<p className="mt-4 font-medium">How can I help you today?</p>
-				</div>
-				<ThreadWelcomeSuggestions />
-			</div>
-		</ThreadPrimitive.Empty>
-	);
-};
-
-const ThreadWelcomeSuggestions: FC = () => {
-	return (
-		<div className="mt-3 flex w-full items-stretch justify-center gap-4">
-			<ThreadPrimitive.Suggestion
-				className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
-				prompt="Who is Daniel Treviño Bergman?"
-				method="replace"
-				autoSend
-			>
-				<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-					Who is Daniel Treviño Bergman?
-				</span>
-			</ThreadPrimitive.Suggestion>
-			<ThreadPrimitive.Suggestion
-				className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
-				prompt="What is his professional experience?"
-				method="replace"
-				autoSend
-			>
-				<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-					What is his professional experience?
-				</span>
-			</ThreadPrimitive.Suggestion>
-			<ThreadPrimitive.Suggestion
-				className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
-				prompt="Give me his CV"
-				method="replace"
-				autoSend
-			>
-				<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-					Give me his CV
-				</span>
-			</ThreadPrimitive.Suggestion>
+		<div className="text-center text-2xl font-bold">
+			<WordRotate words={messages} duration={4000} />
 		</div>
 	);
 };
 
+const ThreadWelcomeSuggestions: FC = () => {
+	const suggestions = [
+		"Tell me about Daniel Treviño Bergman",
+		"What is his professional experience?",
+		"What are his areas of expertise?",
+		"Give me his Resume",
+		"Give me his socials",
+	];
+
+	return (
+		<div className="mt-6 grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+			{suggestions.map((prompt) => (
+				<ThreadPrimitive.Suggestion
+					key={prompt}
+					className="hover:bg-muted/80 grid max-w-sm place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer"
+					prompt={prompt}
+					method="replace"
+					autoSend
+				>
+					<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
+						{prompt}
+					</span>
+				</ThreadPrimitive.Suggestion>
+			))}
+		</div>
+	);
+};
 const Composer: FC = () => {
 	return (
 		<ComposerPrimitive.Root className="focus-within:border-ring/20 flex w-full flex-wrap items-end rounded-lg border bg-inherit px-2.5 shadow-sm transition-colors ease-in">

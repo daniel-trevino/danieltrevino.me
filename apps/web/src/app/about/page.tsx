@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function AboutPage() {
 	return (
-		<div className="max-w-4xl mx-auto px-6 py-8 space-y-8">
+		<div className="max-w-4xl mx-auto px-2 py-8 space-y-8">
 			<section className="space-y-6">
 				<h2 className="text-3xl font-bold text-foreground mb-4">How to use</h2>
 				<ul className="space-y-3 text-muted-foreground">

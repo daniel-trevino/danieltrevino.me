@@ -38,7 +38,7 @@ const ChatPageWithRuntime = ({ messages }: { messages: any }) => {
 		<SidebarProvider defaultOpen>
 			<AssistantRuntimeProvider runtime={runtime}>
 				<ChatTools />
-				<div className="w-full px-4">
+				<div className="w-full">
 					<Thread />
 				</div>
 			</AssistantRuntimeProvider>
