@@ -19,6 +19,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { useChatContext } from "../chat/ChatContext";
+import { useMessages } from "../chat/hooks/useMessages";
 import { useThreads } from "../chat/hooks/useThreads";
 
 export function ThreadSidebar() {
@@ -29,6 +30,7 @@ export function ThreadSidebar() {
 	const isAboutPage = pathname === "/about";
 	const isMobile = useIsMobile();
 	const { setOpenMobile } = useSidebar();
+	const { refetch } = useMessages();
 
 	// State for managing rename functionality
 	const [renameThreadId, setRenameThreadId] = useState<string | null>(null);
@@ -67,7 +69,8 @@ export function ThreadSidebar() {
 		if (isMobile) {
 			setOpenMobile(false);
 		}
-	}, [isMobile, setOpenMobile]);
+		refetch();
+	}, [isMobile, setOpenMobile, refetch]);
 
 	// Menu items.
 	const items = [
@@ -88,7 +91,11 @@ export function ThreadSidebar() {
 							{items.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton asChild>
-										<button type="button" onClick={item.onClick}>
+										<button
+											type="button"
+											onClick={item.onClick}
+											className="cursor-pointer"
+										>
 											<item.icon />
 											<span>{item.title}</span>
 										</button>

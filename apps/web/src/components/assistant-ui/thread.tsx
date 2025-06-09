@@ -110,7 +110,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 		"Tell me about Daniel Treviño Bergman",
 		"What is his professional experience?",
 		"What are his areas of expertise?",
-		"Give me his Resume",
+		"Give me his resume",
 		"Give me his socials",
 	];
 

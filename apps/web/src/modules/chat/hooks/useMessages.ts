@@ -9,7 +9,7 @@ export const useMessages = (threadIdProp?: string) => {
   // Use the passed threadId if provided, otherwise fall back to context
   const threadId = threadIdProp || contextThreadId;
 
-  const { data: messages, isLoading, refetch } = useQuery({
+  const { data: messages, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["messages", threadId],
     queryFn: () => {
       if (pathname === "/") {
@@ -23,5 +23,12 @@ export const useMessages = (threadIdProp?: string) => {
     enabled: !!threadId,
   });
 
-  return { messages, isLoading, refetch };
+  // Combine both loading states - true during initial load OR refetch
+  const loading = isLoading || isFetching;
+
+  return {
+    messages,
+    isLoading: loading, // This will be true during both initial load and refetches
+    refetch
+  };
 };
