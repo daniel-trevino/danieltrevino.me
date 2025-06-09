@@ -51,7 +51,9 @@ export default function RootLayout({
 											</p>
 										</div>
 										<Link href="/about">
-											<Button variant="outline">About</Button>
+											<Button variant="outline" className="cursor-pointer">
+												About
+											</Button>
 										</Link>
 									</div>
 								</div>
