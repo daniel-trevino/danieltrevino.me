@@ -10,6 +10,7 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from "@/components/ui/sidebar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DeleteThreadForm } from "@/modules/thread/DeleteThreadForm";
 import { RenameThreadForm } from "@/modules/thread/RenameThreadForm";
@@ -112,8 +113,10 @@ export function ThreadSidebar() {
 					<SidebarGroupContent>
 						<SidebarMenu>
 							{isLoading && (
-								<div className="px-4 py-2 text-sm text-muted-foreground">
-									Loading threads...
+								<div className="px-2 py-1 text-sm text-muted-foreground">
+									<Skeleton className="h-6 w-[200px] my-2" />
+									<Skeleton className="h-6 w-[200px] my-2" />
+									<Skeleton className="h-6 w-[200px] my-2" />
 								</div>
 							)}
 							{error && (
