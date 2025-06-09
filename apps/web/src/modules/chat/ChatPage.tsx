@@ -25,7 +25,7 @@ const ChatPageWithRuntime = ({ messages }: { messages: any }) => {
 		initialMessages: messages,
 		onResponse: () => {
 			// We use this instead of nextjs router to avoid aborting the stream
-			window.history.pushState(null, "", `/${threadId}`);
+			window.history.pushState(null, "", `/c/${threadId}`);
 		},
 		onFinish: async () => {
 			// Reload the threads

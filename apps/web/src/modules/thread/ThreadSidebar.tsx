@@ -14,7 +14,7 @@ import { RenameThreadForm } from "@/modules/thread/RenameThreadForm";
 import { ThreadMenu } from "@/modules/thread/ThreadMenu";
 import { SquarePenIcon } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { useChatContext } from "../chat/ChatContext";
 import { useThreads } from "../chat/hooks/useThreads";
@@ -23,6 +23,8 @@ export function ThreadSidebar() {
 	const { reset, threadId, generateThreadId } = useChatContext();
 	const { threads, isLoading, error } = useThreads();
 	const router = useRouter();
+	const pathname = usePathname();
+	const isAboutPage = pathname === "/about";
 
 	// State for managing rename functionality
 	const [renameThreadId, setRenameThreadId] = useState<string | null>(null);
@@ -126,11 +128,11 @@ export function ThreadSidebar() {
 										) : (
 											<SidebarMenuButton
 												asChild
-												isActive={thread.id === threadId}
+												isActive={thread.id === threadId && !isAboutPage}
 												className="w-full group/thread"
 											>
 												<Link
-													href={thread.id ? `/${thread.id}` : "#"}
+													href={thread.id ? `/c/${thread.id}` : "#"}
 													className="flex items-center justify-between w-full"
 												>
 													<span className="truncate">
@@ -139,7 +141,7 @@ export function ThreadSidebar() {
 													<ThreadMenu
 														onRename={() => handleRenameStart(thread)}
 														onDelete={() => setDeleteThreadId(thread.id)}
-														isActive={thread.id === threadId}
+														isActive={thread.id === threadId && !isAboutPage}
 													/>
 												</Link>
 											</SidebarMenuButton>
