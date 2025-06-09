@@ -1,9 +1,9 @@
 import { BraveWebSearchTool } from "./BraveWebSearch";
 import { GetGithubUrlTool } from "./GetGithubUrlTool";
+import { GetLinkedinUrlTool } from "./GetLinkedinUrlTool";
+import { GetXUrlTool } from "./GetXUrlTool";
 import { KnowledgeSearchTool } from "./KnowledgeSearch";
 import { ShareCVTool } from "./ShareCVTool";
-import { ShareLinkedinTool } from "./ShareLinkedinTool";
-import { ShareXTool } from "./ShareXTool";
 
 export const ChatTools = () => {
 	return (
@@ -11,9 +11,9 @@ export const ChatTools = () => {
 			<ShareCVTool />
 			<BraveWebSearchTool />
 			<KnowledgeSearchTool />
-			<ShareLinkedinTool />
+			<GetLinkedinUrlTool />
 			<GetGithubUrlTool />
-			<ShareXTool />
+			<GetXUrlTool />
 		</>
 	);
 };

@@ -1,17 +1,16 @@
 "use client";
 import { Icons } from "@/components/icons";
 import { makeAssistantToolUI } from "@assistant-ui/react";
+import { getXUrl } from "@repo/tools/get-x-url";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import type { z } from "zod";
 
-type ShareXArgs = Record<string, never>;
-
-type ShareXResult = {
-	url: string;
-};
-
-export const ShareXTool = makeAssistantToolUI<ShareXArgs, ShareXResult>({
-	toolName: "shareXTool",
+export const GetXUrlTool = makeAssistantToolUI<
+	z.infer<typeof getXUrl.inputSchema>,
+	z.infer<typeof getXUrl.outputSchema>
+>({
+	toolName: getXUrl.id,
 	render: ({ status, result }) => {
 		if (status.type === "running") {
 			return (

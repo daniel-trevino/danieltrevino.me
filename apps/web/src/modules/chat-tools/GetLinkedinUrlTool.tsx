@@ -1,18 +1,14 @@
 "use client";
 import { Icons } from "@/components/icons";
 import { makeAssistantToolUI } from "@assistant-ui/react";
+import type { getLinkedinUrl } from "@repo/tools/get-linkedin-url";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import type { z } from "zod";
 
-type ShareLinkedinArgs = Record<string, never>;
-
-type ShareLinkedinResult = {
-	url: string;
-};
-
-export const ShareLinkedinTool = makeAssistantToolUI<
-	ShareLinkedinArgs,
-	ShareLinkedinResult
+export const GetLinkedinUrlTool = makeAssistantToolUI<
+	z.infer<typeof getLinkedinUrl.inputSchema>,
+	z.infer<typeof getLinkedinUrl.outputSchema>
 >({
 	toolName: "shareLinkedinTool",
 	render: ({ status, result }) => {

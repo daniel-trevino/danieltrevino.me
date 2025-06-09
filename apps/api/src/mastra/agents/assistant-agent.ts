@@ -1,13 +1,13 @@
 import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { MCPClient } from "@mastra/mcp";
-import { getGithubUrl } from "@repo/tools/get-github-url";
+import { getGithubUrl, getLinkedinUrl, getXUrl } from "@repo/tools";
 import { memory } from "../lib/memory";
 import { getGithubUrlTool } from "../tools/get-github-url";
+import { getLinkedinUrlTool } from "../tools/get-linkedin-url";
+import { getXUrlTool } from "../tools/get-x-url";
 import { RAG_QUERY_TOOL, RAG_STATS_TOOL } from "../tools/rag-query";
 import { SHARE_CV_TOOL } from "../tools/share-cv";
-import { SHARE_LINKEDIN_TOOL } from "../tools/share-linkedin";
-import { SHARE_X_TOOL } from "../tools/share-x";
 
 const mcp = new MCPClient({
     servers: {
@@ -82,11 +82,11 @@ export const assistantAgent = new Agent({
         return {
             ...mcpTools,
             [getGithubUrl.id]: getGithubUrlTool,
+            [getLinkedinUrl.id]: getLinkedinUrlTool,
+            [getXUrl.id]: getXUrlTool,
             shareCvTool: SHARE_CV_TOOL,
             queryDocuments: RAG_QUERY_TOOL,
             getDocumentStats: RAG_STATS_TOOL,
-            shareLinkedinTool: SHARE_LINKEDIN_TOOL,
-            shareXTool: SHARE_X_TOOL,
         };
     },
 });

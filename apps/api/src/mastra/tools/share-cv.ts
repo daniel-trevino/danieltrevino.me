@@ -6,9 +6,9 @@ export const SHARE_CV_TOOL = createTool({
 	description: "Shares Daniel Treviño Bergman's CV with the user. This tool should only be used if the user asks explicitly for the CV.",
 	inputSchema: z.object({}),
 	outputSchema: z.object({
-		rawText: z.string(),
+		url: z.string(),
 	}),
 	execute: async () => {
-		return { rawText: 'Here is the CV of Daniel Treviño Bergman.' };
+		return { url: 'https://danieltrevino.me/Daniel_Treviño_Bergman_2025.pdf' };
 	},
 });
