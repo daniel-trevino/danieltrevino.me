@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
   // Create AbortController with 3-second timeout
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 2000);
+  const timeoutId = setTimeout(() => controller.abort(), 1000);
 
   try {
     const response = await mastraClient(url, {
