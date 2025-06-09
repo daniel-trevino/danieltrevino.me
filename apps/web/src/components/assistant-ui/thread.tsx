@@ -11,18 +11,19 @@ import {
 } from "@assistant-ui/react";
 import {
 	ArrowDownIcon,
+	ArrowUpIcon,
 	CheckIcon,
 	ChevronLeftIcon,
 	ChevronRightIcon,
 	CopyIcon,
 	PencilIcon,
-	SendHorizontalIcon,
 } from "lucide-react";
 import type { FC } from "react";
 
 import { MarkdownText } from "@/components/assistant-ui/markdown-text";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/components/ui/button";
+import { motion } from "motion/react";
 import { WordRotate } from "../magicui/word-rotate";
 import { ToolFallback } from "./tool-fallback";
 
@@ -113,24 +114,46 @@ const ThreadWelcomeSuggestions: FC = () => {
 		"Give me his socials",
 	];
 
+	const container = {
+		hidden: { opacity: 0 },
+		show: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 0.1,
+			},
+		},
+	};
+
+	const item = {
+		hidden: { opacity: 0, x: -20 },
+		show: { opacity: 1, x: 0 },
+	};
+
 	return (
-		<div className="mt-6 grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+		<motion.div
+			className="mt-6 grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+			variants={container}
+			initial="hidden"
+			animate="show"
+		>
 			{suggestions.map((prompt) => (
-				<ThreadPrimitive.Suggestion
-					key={prompt}
-					className="hover:bg-muted/80 grid max-w-sm place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer"
-					prompt={prompt}
-					method="replace"
-					autoSend
-				>
-					<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-						{prompt}
-					</span>
-				</ThreadPrimitive.Suggestion>
+				<motion.div key={prompt} variants={item}>
+					<ThreadPrimitive.Suggestion
+						className="hover:bg-muted/80 grid max-w-sm place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
+						prompt={prompt}
+						method="replace"
+						autoSend
+					>
+						<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
+							{prompt}
+						</span>
+					</ThreadPrimitive.Suggestion>
+				</motion.div>
 			))}
-		</div>
+		</motion.div>
 	);
 };
+
 const Composer: FC = () => {
 	return (
 		<ComposerPrimitive.Root className="focus-within:border-ring/20 flex w-full flex-wrap items-end rounded-lg border bg-inherit px-2.5 shadow-sm transition-colors ease-in">
@@ -153,9 +176,9 @@ const ComposerAction: FC = () => {
 					<TooltipIconButton
 						tooltip="Send"
 						variant="default"
-						className="my-2.5 size-8 p-2 transition-opacity ease-in"
+						className="my-2.5 size-8 p-2 transition-opacity ease-in cursor-pointer rounded-full"
 					>
-						<SendHorizontalIcon />
+						<ArrowUpIcon />
 					</TooltipIconButton>
 				</ComposerPrimitive.Send>
 			</ThreadPrimitive.If>
@@ -164,7 +187,7 @@ const ComposerAction: FC = () => {
 					<TooltipIconButton
 						tooltip="Cancel"
 						variant="default"
-						className="my-2.5 size-8 p-2 transition-opacity ease-in"
+						className="my-2.5 size-8 p-2 transition-opacity ease-in cursor-pointer rounded-full"
 					>
 						<CircleStopIcon />
 					</TooltipIconButton>
