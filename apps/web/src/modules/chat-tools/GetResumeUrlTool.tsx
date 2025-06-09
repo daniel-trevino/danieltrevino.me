@@ -1,20 +1,16 @@
 "use client";
 
 import { makeAssistantToolUI } from "@assistant-ui/react";
+import { getResumeUrl } from "@repo/tools";
 import { FileUser, Loader2 } from "lucide-react";
+import type { z } from "zod";
 
-type DownloadCVArgs = Record<string, never>;
-
-type DownloadCVResult = {
-	rawText: string;
-};
-
-export const ShareCVTool = makeAssistantToolUI<
-	DownloadCVArgs,
-	DownloadCVResult
+export const GetResumeUrlTool = makeAssistantToolUI<
+	z.infer<typeof getResumeUrl.inputSchema>,
+	z.infer<typeof getResumeUrl.outputSchema>
 >({
-	toolName: "shareCvTool",
-	render: ({ args, status, result }) => {
+	toolName: getResumeUrl.id,
+	render: ({ status, result }) => {
 		if (status.type === "running") {
 			return (
 				<div className="flex items-center gap-2">
@@ -30,7 +26,7 @@ export const ShareCVTool = makeAssistantToolUI<
 
 		const handleDownload = async () => {
 			try {
-				const response = await fetch("/Daniel Treviño Bergman 2025.pdf");
+				const response = await fetch(result.url as string);
 
 				if (!response.ok) {
 					throw new Error("File not found");
@@ -41,8 +37,8 @@ export const ShareCVTool = makeAssistantToolUI<
 				const link = document.createElement("a");
 
 				link.href = url;
-				link.download = "Daniel Treviño Bergman 2025.pdf";
-				link.setAttribute("download", "Daniel Treviño Bergman 2025.pdf");
+				link.download = "Daniel_Treviño_Bergman_2025.pdf";
+				link.setAttribute("download", "Daniel_Treviño_Bergman_2025.pdf");
 
 				document.body.appendChild(link);
 				link.click();
@@ -53,7 +49,7 @@ export const ShareCVTool = makeAssistantToolUI<
 			} catch (error) {
 				console.error("Download failed:", error);
 				// Fallback to opening in new tab if download fails
-				window.open("/Daniel Treviño Bergman 2025.pdf", "_blank");
+				window.open(result.url as string, "_blank");
 			}
 		};
 
@@ -73,7 +69,7 @@ export const ShareCVTool = makeAssistantToolUI<
 				<div className="mt-4 space-y-2">
 					<div className="flex justify-between text-sm">
 						<span className="text-muted-foreground">File name:</span>
-						<span className="font-medium">Daniel Treviño Bergman 2025.pdf</span>
+						<span className="font-medium">Daniel_Treviño_Bergman_2025.pdf</span>
 					</div>
 					<div className="flex justify-between text-sm">
 						<span className="text-muted-foreground">Size:</span>
@@ -89,7 +85,7 @@ export const ShareCVTool = makeAssistantToolUI<
 						Download
 					</button>
 					<a
-						href="/Daniel Treviño Bergman 2025.pdf"
+						href={result.url as string}
 						target="_blank"
 						rel="noopener noreferrer"
 						className="flex-1 rounded-md border border-primary bg-transparent px-4 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground transition-colors text-center inline-flex items-center justify-center"

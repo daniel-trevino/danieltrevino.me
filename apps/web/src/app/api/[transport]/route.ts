@@ -1,4 +1,4 @@
-import { getGithubUrl, getLinkedinUrl, getXUrl } from '@repo/tools';
+import { getGithubUrl, getLinkedinUrl, getResumeUrl, getXUrl } from '@repo/tools';
 import { createMcpHandler } from '@vercel/mcp-adapter';
 
 const handler = createMcpHandler(
@@ -36,6 +36,18 @@ const handler = createMcpHandler(
       async () => {
         return {
           content: [{ type: 'text', text: getXUrl.output.url as string }],
+        };
+      }
+    )
+    server.tool(
+      getResumeUrl.id,
+      getResumeUrl.description,
+      {
+        ...getResumeUrl.inputSchema,
+      },
+      async () => {
+        return {
+          content: [{ type: 'text', text: getResumeUrl.output.url as string }],
         };
       }
     )
