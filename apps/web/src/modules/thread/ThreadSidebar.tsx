@@ -8,7 +8,9 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
+	useSidebar,
 } from "@/components/ui/sidebar";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { DeleteThreadForm } from "@/modules/thread/DeleteThreadForm";
 import { RenameThreadForm } from "@/modules/thread/RenameThreadForm";
 import { ThreadMenu } from "@/modules/thread/ThreadMenu";
@@ -25,6 +27,8 @@ export function ThreadSidebar() {
 	const router = useRouter();
 	const pathname = usePathname();
 	const isAboutPage = pathname === "/about";
+	const isMobile = useIsMobile();
+	const { setOpenMobile } = useSidebar();
 
 	// State for managing rename functionality
 	const [renameThreadId, setRenameThreadId] = useState<string | null>(null);
@@ -37,7 +41,11 @@ export function ThreadSidebar() {
 		// Push a new URL to the browser without reloading
 		router.push("/");
 		generateThreadId();
-	}, [router, generateThreadId]);
+		// Close sidebar on mobile
+		if (isMobile) {
+			setOpenMobile(false);
+		}
+	}, [router, generateThreadId, isMobile, setOpenMobile]);
 
 	const handleRenameStart = useCallback((thread: any) => {
 		setRenameThreadId(thread.id);
@@ -54,7 +62,12 @@ export function ThreadSidebar() {
 		setRenameValue("");
 	}, []);
 
-	// Remove the handleDeleteConfirm callback since deletion is now handled in DeleteThreadForm
+	const handleThreadClick = useCallback(() => {
+		// Close sidebar on mobile when navigating to a thread
+		if (isMobile) {
+			setOpenMobile(false);
+		}
+	}, [isMobile, setOpenMobile]);
 
 	// Menu items.
 	const items = [
@@ -134,6 +147,7 @@ export function ThreadSidebar() {
 												<Link
 													href={thread.id ? `/c/${thread.id}` : "#"}
 													className="flex items-center justify-between w-full"
+													onClick={handleThreadClick}
 												>
 													<span className="truncate">
 														{thread.title || thread.id}

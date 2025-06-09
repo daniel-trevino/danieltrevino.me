@@ -40,7 +40,7 @@ export default function AboutPage() {
 							<span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0" />
 							<span className="text-base leading-relaxed">
 								Connect to:{" "}
-								<code className="bg-background/80 border border-border px-2 py-1 rounded font-mono text-sm text-foreground">
+								<code className="bg-background/80 border border-border px-2 py-1 rounded font-mono text-xs md:text-sm text-foreground">
 									https://danieltrevino.me/api/mcp
 								</code>
 							</span>
