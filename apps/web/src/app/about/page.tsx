@@ -13,7 +13,7 @@ export default function AboutPage() {
 							<Link href="/" className="text-primary font-bold hover:underline">
 								chat directly
 							</Link>{" "}
-							with an LLM that has full knowledge of me and my work in this
+							with an AI Agent that has full knowledge of me and my work in this
 							website.
 						</span>
 					</li>
@@ -21,7 +21,7 @@ export default function AboutPage() {
 						<span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0" />
 						<span className="text-base leading-relaxed">
 							You can also connect to the MCP Server to use the available tools
-							in your own assistant.
+							in your own assistant/LLM.
 						</span>
 					</li>
 				</ul>

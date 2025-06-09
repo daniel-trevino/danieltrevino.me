@@ -16,8 +16,8 @@ export const useMessages = (threadIdProp?: string) => {
         method: "POST",
         body: JSON.stringify({ agentId, threadId, resourceId }),
       }).then((res) => res.json()),
-    enabled: !!threadId,
+    enabled: !!threadId && pathname !== "/",
   });
 
-  return { messages, isLoading, refetch };
+  return { messages: pathname === "/" ? [] : messages, isLoading, refetch };
 };
