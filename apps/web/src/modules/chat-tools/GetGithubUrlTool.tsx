@@ -2,7 +2,7 @@
 
 import { Icons } from "@/components/icons";
 import { makeAssistantToolUI } from "@assistant-ui/react";
-import { getGithubUrl } from "@repo/tools";
+import { getGithubUrl } from "@repo/tools/get-github-url";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import type { z } from "zod";

@@ -1,7 +1,7 @@
 import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { MCPClient } from "@mastra/mcp";
-import { getGithubUrl } from "@repo/tools";
+import { getGithubUrl } from "@repo/tools/get-github-url";
 import { memory } from "../lib/memory";
 import { getGithubUrlTool } from "../tools/get-github-url";
 import { RAG_QUERY_TOOL, RAG_STATS_TOOL } from "../tools/rag-query";

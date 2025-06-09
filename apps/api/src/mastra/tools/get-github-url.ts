@@ -1,5 +1,5 @@
 import { createTool } from "@mastra/core/tools";
-import { getGithubUrl } from "@repo/tools";
+import { getGithubUrl } from "@repo/tools/get-github-url";
 
 export const getGithubUrlTool = createTool({
 	id: getGithubUrl.id,
