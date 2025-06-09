@@ -1,20 +1,17 @@
 "use client";
+
 import { Icons } from "@/components/icons";
 import { makeAssistantToolUI } from "@assistant-ui/react";
+import { getGithubUrl } from "@repo/tools";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import type { z } from "zod";
 
-type ShareGithubArgs = Record<string, never>;
-
-type ShareGithubResult = {
-	url: string;
-};
-
-export const ShareGithubTool = makeAssistantToolUI<
-	ShareGithubArgs,
-	ShareGithubResult
+export const GetGithubUrlTool = makeAssistantToolUI<
+	z.infer<typeof getGithubUrl.inputSchema>,
+	z.infer<typeof getGithubUrl.outputSchema>
 >({
-	toolName: "shareGithubTool",
+	toolName: getGithubUrl.id,
 	render: ({ status, result }) => {
 		if (status.type === "running") {
 			return (

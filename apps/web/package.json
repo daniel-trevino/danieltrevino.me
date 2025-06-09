@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@repo/tools": "workspace:*",
     "@ai-sdk/openai": "^1.3.22",
     "@assistant-ui/react": "^0.10.20",
     "@assistant-ui/react-ai-sdk": "^0.10.13",
@@ -20,6 +21,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@tanstack/react-query": "^5.80.5",
+    "@vercel/mcp-adapter": "^0.9.1",
     "ai": "^4.3.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -30,7 +32,8 @@
     "react-resizable-panels": "^3.0.2",
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.3.0",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "zod": "^3.25.56"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
