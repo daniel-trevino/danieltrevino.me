@@ -129,17 +129,81 @@ const ThreadWelcomeSuggestions: FC = () => {
 		show: { opacity: 1, x: 0 },
 	};
 
+	if (suggestions.length === 5) {
+		const firstRow = suggestions.slice(0, 3);
+		const secondRow = suggestions.slice(3);
+		return (
+			<div className="flex flex-col gap-4 w-full items-center">
+				<motion.div
+					className="flex flex-col sm:flex-row gap-4 justify-center w-full"
+					variants={container}
+					initial="hidden"
+					animate="show"
+				>
+					{firstRow.map((prompt) => (
+						<motion.div
+							key={prompt}
+							variants={item}
+							className="flex-1 min-w-0 max-w-xs"
+						>
+							<ThreadPrimitive.Suggestion
+								className="hover:bg-muted/80 grid place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
+								prompt={prompt}
+								method="replace"
+								autoSend
+							>
+								<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
+									{prompt}
+								</span>
+							</ThreadPrimitive.Suggestion>
+						</motion.div>
+					))}
+				</motion.div>
+				<motion.div
+					className="flex flex-col sm:flex-row gap-4 justify-center w-full"
+					variants={container}
+					initial="hidden"
+					animate="show"
+				>
+					{secondRow.map((prompt) => (
+						<motion.div
+							key={prompt}
+							variants={item}
+							className="flex-1 min-w-0 max-w-xs"
+						>
+							<ThreadPrimitive.Suggestion
+								className="hover:bg-muted/80 grid place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
+								prompt={prompt}
+								method="replace"
+								autoSend
+							>
+								<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
+									{prompt}
+								</span>
+							</ThreadPrimitive.Suggestion>
+						</motion.div>
+					))}
+				</motion.div>
+			</div>
+		);
+	}
+
+	// Default: grid with up to 4 columns, center items
 	return (
 		<motion.div
-			className="mt-6 grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+			className="mt-6 grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 justify-center"
 			variants={container}
 			initial="hidden"
 			animate="show"
 		>
 			{suggestions.map((prompt) => (
-				<motion.div key={prompt} variants={item}>
+				<motion.div
+					key={prompt}
+					variants={item}
+					className="flex-1 min-w-0 max-w-xs mx-auto"
+				>
 					<ThreadPrimitive.Suggestion
-						className="hover:bg-muted/80 grid max-w-sm place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
+						className="hover:bg-muted/80 grid place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
 						prompt={prompt}
 						method="replace"
 						autoSend

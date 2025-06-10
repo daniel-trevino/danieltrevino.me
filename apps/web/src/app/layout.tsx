@@ -36,7 +36,7 @@ export default function RootLayout({
 			>
 				<QueryClientProvider>
 					<ChatContextProvider>
-						<SidebarProvider>
+						<SidebarProvider defaultOpen={false}>
 							<ThreadSidebar />
 							<div className="flex flex-col w-full">
 								<div className="flex items-center justify-between">

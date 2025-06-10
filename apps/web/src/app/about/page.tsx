@@ -1,8 +1,17 @@
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function AboutPage() {
 	return (
 		<div className="max-w-4xl mx-auto px-2 py-8 space-y-8">
+			<div className="mb-4">
+				<Link
+					href="/"
+					className="inline-flex items-center text-primary font-semibold hover:underline"
+				>
+					<ArrowLeft className="mr-2 h-5 w-5" /> Back
+				</Link>
+			</div>
 			<section className="space-y-6">
 				<h2 className="text-3xl font-bold text-foreground mb-4">How to use</h2>
 				<ul className="space-y-3 text-muted-foreground">
@@ -85,16 +94,16 @@ export default function AboutPage() {
 									Startup Founders & Small Teams:
 								</span>
 								Assess my fit as a generalist in lean environments. Example:
-								“Would Daniel be a good fit for a full-stack role at an
-								early-stage startup?”
+								"Would Daniel be a good fit for a full-stack role at an
+								early-stage startup?"
 							</p>
 						</li>
 						<li className="flex items-start">
 							<span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0" />
 							<p className="text-base leading-relaxed">
 								<span className="font-bold">Hiring Managers:</span> Drill into
-								my proficiency with specific technologies. Example: “What's
-								Daniel's proficiency level with React, TypeScript, and DevOps?”
+								my proficiency with specific technologies. Example: "What's
+								Daniel's proficiency level with React, TypeScript, and DevOps?"
 							</p>
 						</li>
 						<li className="flex items-start">
@@ -111,7 +120,7 @@ export default function AboutPage() {
 							<p className="text-base leading-relaxed">
 								<span className="font-bold">Career Coaches:</span> Use my
 								resume, GitHub activity, and website content for assessments.
-								Example: “Summarize Daniel's career highlights.”
+								Example: "Summarize Daniel's career highlights."
 							</p>
 						</li>
 						<li className="flex items-start">
@@ -119,16 +128,16 @@ export default function AboutPage() {
 							<p className="text-base leading-relaxed">
 								<span className="font-bold">Product Managers & Designers:</span>{" "}
 								Learn how I collaborate on product vision and feature
-								prioritization. Example: “How would Daniel contribute to our
-								feature roadmap?”
+								prioritization. Example: "How would Daniel contribute to our
+								feature roadmap?"
 							</p>
 						</li>
 						<li className="flex items-start">
 							<span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0" />
 							<p className="text-base leading-relaxed">
 								<span className="font-bold">Anyone Evaluating Fit:</span> Use
-								the prompt: “Is Daniel a good fit for this role? [paste job
-								description or URL]”
+								the prompt: "Is Daniel a good fit for this role? [paste job
+								description or URL]"
 							</p>
 						</li>
 					</ul>
