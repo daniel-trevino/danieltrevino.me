@@ -24,7 +24,7 @@ export const GetGithubUrlTool = makeAssistantToolUI<
 
 		if (status.type === "incomplete" && status.reason === "error") {
 			return (
-				<div className="text-red-500">Failed to provide LinkedIn profile</div>
+				<div className="text-red-500">Failed to provide Github profile</div>
 			);
 		}
 
