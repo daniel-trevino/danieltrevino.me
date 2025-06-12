@@ -9,10 +9,10 @@
     "build": "mastra build",
     "check-types": "tsc --noEmit",
     "test": "jest --detectOpenHandles",
-    "rag-process-docs": "pnpm exec tsx src/process-documents.ts",
-    "rag-stats": "pnpm exec tsx src/process-documents.ts --stats",
-    "rag-test": "pnpm exec tsx src/process-documents.ts --test",
-    "rag-clear": "pnpm exec tsx src/process-documents.ts --clear"
+    "rag-process-docs": "pnpm exec tsx src/rag-system/process-documents.ts",
+    "rag-stats": "pnpm exec tsx src/rag-system/process-documents.ts --stats",
+    "rag-test": "pnpm exec tsx src/rag-system/process-documents.ts --test",
+    "rag-clear": "pnpm exec tsx src/rag-system/process-documents.ts --clear"
   },
   "jest": {
     "preset": "@repo/jest-presets/node"
