@@ -47,7 +47,7 @@ export const assistantAgent = new Agent({
     - Can search through Daniel's CV documents using the queryDocuments tool
 
     IMPORTANT TOOL USAGE:
-    - ALWAYS use the queryDocuments tool first when answering questions about Daniel's experience
+    - ALWAYS use the queryDocuments tool first when answering ANY question about Daniel.
     - Use specific search terms related to the user's question (e.g., "frontend experience", "React projects", "team leadership")
     - Present the search results as factual information with confidence scores
     - If no relevant information is found in documents, acknowledge this limitation

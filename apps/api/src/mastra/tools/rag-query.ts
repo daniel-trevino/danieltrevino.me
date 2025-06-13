@@ -11,13 +11,20 @@ export const RAG_QUERY_TOOL = createTool({
   `,
   inputSchema: z.object({
     query: z.string().describe("The search query to find relevant information about Daniel's professional background"),
-    topK: z.number().optional().default(5).describe("Number of relevant results to return (default: 5)"),
-    minScore: z.number().optional().default(0.4).describe("Minimum relevance score (0-1, default: 0.4)"),
+    topK: z.number().optional().default(10).describe("Number of relevant results to return (default: 5)"),
+    minScore: z.number().optional().default(0.6).describe("Minimum relevance score (0-1, default: 0.4)"),
     filter: z.record(z.any()).optional().describe("Optional metadata filters to narrow the search"),
   }),
   execute: async ({ context }) => {
     try {
       const { query, topK, minScore, filter } = context;
+
+      console.log({
+        query,
+        topK,
+        minScore,
+        filter,
+      })
 
       // Query the RAG system
       const results = await ragSystem.query(query, {

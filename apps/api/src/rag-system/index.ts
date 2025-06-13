@@ -22,19 +22,23 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 interface RagConfig {
   indexName: string;
   dimension: number;
-  chunkSize: number;
-  chunkOverlap: number;
+  chunkSize: number; // Recommended: 120
+  chunkOverlap: number; // Recommended: 40
   sourceDocsPath: string;
   embeddingModel: ReturnType<typeof openai.embedding>;
+  topK: number;
+  minScore: number;
 }
 
 export const RAG_CONFIG: RagConfig = {
   indexName: "documents",
-  dimension: 1536, // text-embedding-3-small dimension
-  chunkSize: 512,
-  chunkOverlap: 50,
+  dimension: 1536,
+  chunkSize: 120,
+  chunkOverlap: 40,
   sourceDocsPath: join(__dirname, "source-documents"),
   embeddingModel: openai.embedding("text-embedding-3-small"),
+  topK: 10,
+  minScore: 0.6,
 };
 
 // Initialize vector store
@@ -192,6 +196,22 @@ export class RAGSystem {
           }),
         });
 
+        // For markdown, prepend headers to chunk text and add to metadata
+        if (ext === ".md") {
+          chunks.forEach((chunk) => {
+            const headers = [];
+            if (chunk.metadata.title) headers.push(`# ${chunk.metadata.title}`);
+            if (chunk.metadata.section)
+              headers.push(`## ${chunk.metadata.section}`);
+            if (chunk.metadata.subsection)
+              headers.push(`### ${chunk.metadata.subsection}`);
+            chunk.text = `${headers.join("\n")}${headers.length ? "\n" : ""}${chunk.text}`;
+            chunk.metadata.title = chunk.metadata.title || null;
+            chunk.metadata.section = chunk.metadata.section || null;
+            chunk.metadata.subsection = chunk.metadata.subsection || null;
+          });
+        }
+
         if (chunks.length === 0) {
           console.warn(`⚠️ No chunks generated for ${path.basename(filePath)}`);
           continue;
@@ -245,7 +265,11 @@ export class RAGSystem {
       filter?: Record<string, any>;
     } = {},
   ): Promise<Array<{ text: string; metadata: any; score: number }>> {
-    const { topK = 5, minScore = 0.7, filter } = options;
+    const {
+      topK = RAG_CONFIG.topK,
+      minScore = RAG_CONFIG.minScore,
+      filter,
+    } = options;
 
     try {
       // Generate embedding for the query

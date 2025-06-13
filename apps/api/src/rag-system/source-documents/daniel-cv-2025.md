@@ -4,10 +4,13 @@ Senior Software Engineer
 
 ## Professional Summary
 
-Experienced Software Engineer with over 10 years of expertise in the IT Sector with extensive experience of Fullstack, AI and Blockchain Development. He has great expertise in Typescript / Javascript, with frameworks and libraries such as React and Node.js. His experience in various industries and projects facilitates when acquainting with new systems and organisations.
+Daniel is an experienced Software Engineer with over 10 years of expertise in the IT Sector with extensive experience of Fullstack, AI and Blockchain Development. He has great expertise in Typescript / Javascript, with frameworks and libraries such as React and Node.js. His experience in various industries and projects facilitates when acquainting with new systems and organisations.
 
-He has good social and communicative skills that make Daniel a valuable asset in all types of technical projects since he is able to lead the projects and communicate properly to stakeholders the progress of those or any challenge that might need to be taken into consideration.
+Daniel has good social and communicative skills that make Daniel a valuable asset in all types of technical projects since he is able to lead the projects and communicate properly to stakeholders the progress of those or any challenge that might need to be taken into consideration.
 
+## Location
+
+Daniel is originally from Mexico but has been living in Sweden since January 2015. He is currently based in Stockholm, Sweden.
 
 ## Technical Skills
 
