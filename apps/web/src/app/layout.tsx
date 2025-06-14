@@ -1,6 +1,7 @@
 import { QueryClientProvider } from "@/components/QueryClientProvider";
+import { SidebarCustomProvider } from "@/components/SidebarCustomProvider";
 import { Button } from "@/components/ui/button";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { ChatContextProvider } from "@/modules/chat/ChatContext";
 import { ThreadSidebar } from "@/modules/thread/ThreadSidebar";
 import type { Metadata } from "next";
@@ -36,7 +37,7 @@ export default function RootLayout({
 			>
 				<QueryClientProvider>
 					<ChatContextProvider>
-						<SidebarProvider defaultOpen={false}>
+						<SidebarCustomProvider>
 							<ThreadSidebar />
 							<div className="flex flex-col w-full">
 								<div className="flex items-center justify-between">
@@ -62,7 +63,7 @@ export default function RootLayout({
 									{children}
 								</div>
 							</div>
-						</SidebarProvider>
+						</SidebarCustomProvider>
 					</ChatContextProvider>
 				</QueryClientProvider>
 			</body>
