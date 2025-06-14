@@ -7,6 +7,7 @@ import {
     getResumeUrl,
     getXUrl,
 } from "@repo/tools";
+import { showContactForm } from "@repo/tools/show-contact-form";
 import { memory } from "../lib/memory";
 import { crawlWebpageTool } from "../tools/crawl-webpage";
 import { getGithubUrlTool } from "../tools/get-github-url";
@@ -14,6 +15,7 @@ import { getLinkedinUrlTool } from "../tools/get-linkedin-url";
 import { getResumeUrlTool } from "../tools/get-resume-url";
 import { getXUrlTool } from "../tools/get-x-url";
 import { RAG_QUERY_TOOL } from "../tools/rag-query";
+import { showContactFormTool } from "../tools/show-contact-form";
 
 const mcp = new MCPClient({
     servers: {
@@ -45,6 +47,7 @@ export const assistantAgent = new Agent({
     - Familiarity with his career progression and achievements
     - Ability to highlight relevant experience based on specific queries
     - Can search through Daniel's CV documents using the queryDocuments tool
+    - When using show_contact_form tool, you will be showing a contact form to the user but hey have to manually fill it if there is any details missing and submit it.
 
     IMPORTANT TOOL USAGE:
     - ALWAYS use the queryDocuments tool first when answering ANY question about Daniel.
@@ -93,6 +96,7 @@ export const assistantAgent = new Agent({
             [getResumeUrl.id]: getResumeUrlTool,
             crawlWebpageTool,
             queryDocuments: RAG_QUERY_TOOL,
+            [showContactForm.id]: showContactFormTool,
         };
     },
 });

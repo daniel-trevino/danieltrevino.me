@@ -4,6 +4,7 @@ import { GetLinkedinUrlTool } from "./GetLinkedinUrlTool";
 import { GetResumeUrlTool } from "./GetResumeUrlTool";
 import { GetXUrlTool } from "./GetXUrlTool";
 import { KnowledgeSearchTool } from "./KnowledgeSearch";
+import { ShowContactFormTool } from "./ShowContactForm";
 
 export const ChatTools = () => {
 	return (
@@ -14,6 +15,7 @@ export const ChatTools = () => {
 			<GetLinkedinUrlTool />
 			<GetGithubUrlTool />
 			<GetXUrlTool />
+			<ShowContactFormTool />
 		</>
 	);
 };
