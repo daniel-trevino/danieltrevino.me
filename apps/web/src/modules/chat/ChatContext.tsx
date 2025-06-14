@@ -1,12 +1,7 @@
 "use client";
 
-import {
-	type ReactNode,
-	createContext,
-	useContext,
-	useEffect,
-	useState,
-} from "react";
+import { useResourceId } from "@/hooks/use-resource-id";
+import { type ReactNode, createContext, useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useMessages } from "./hooks/useMessages";
 
@@ -22,17 +17,6 @@ interface ChatContextType {
 	setResourceId: (resourceId: string) => void;
 	reset: () => void;
 }
-
-const getInitialResourceId = () => {
-	if (typeof window !== "undefined") {
-		const stored = localStorage.getItem("resourceId");
-		if (stored) return stored;
-		const newId = uuidv4();
-		localStorage.setItem("resourceId", newId);
-		return newId;
-	}
-	return "";
-};
 
 const initialState = {
 	threadId: "",
@@ -57,12 +41,7 @@ export const ChatContextProvider = ({ children }: ChatContextProviderProps) => {
 	const [threadId, setThreadId] = useState(initialState.threadId);
 	const [currentAgentId, setAgentId] = useState(initialState.agentId);
 	const { refetch: refetchMessages } = useMessages();
-	const [currentResourceId, setResourceId] = useState("");
-
-	useEffect(() => {
-		const id = getInitialResourceId();
-		setResourceId(id);
-	}, []);
+	const [resourceId, setResourceId] = useResourceId();
 
 	const generateThreadId = () => {
 		const id = uuidv4();
@@ -79,7 +58,7 @@ export const ChatContextProvider = ({ children }: ChatContextProviderProps) => {
 	const value: ChatContextType = {
 		threadId,
 		agentId: currentAgentId,
-		resourceId: currentResourceId,
+		resourceId,
 		generateThreadId,
 		setThreadId,
 		setAgentId,
