@@ -201,14 +201,21 @@ export class RAGSystem {
           chunks.forEach((chunk) => {
             const headers = [];
             if (chunk.metadata.title) headers.push(`# ${chunk.metadata.title}`);
-            if (chunk.metadata.section)
-              headers.push(`## ${chunk.metadata.section}`);
-            if (chunk.metadata.subsection)
-              headers.push(`### ${chunk.metadata.subsection}`);
+            if (chunk.metadata.section) headers.push(`## ${chunk.metadata.section}`);
+            if (chunk.metadata.subsection) headers.push(`### ${chunk.metadata.subsection}`);
             chunk.text = `${headers.join("\n")}${headers.length ? "\n" : ""}${chunk.text}`;
+
+            // Extract date information for experience sections
+            const dateInfo = this.extractDates(chunk.text, chunk.metadata);
+            const recencyScore = this.calculateRecencyScore(dateInfo.startYear, dateInfo.endYear, dateInfo.isCurrentRole);
+
             chunk.metadata.title = chunk.metadata.title || null;
             chunk.metadata.section = chunk.metadata.section || null;
             chunk.metadata.subsection = chunk.metadata.subsection || null;
+            chunk.metadata.startYear = dateInfo.startYear;
+            chunk.metadata.endYear = dateInfo.endYear;
+            chunk.metadata.isCurrentRole = dateInfo.isCurrentRole;
+            chunk.metadata.recencyScore = recencyScore;
           });
         }
 
@@ -218,7 +225,7 @@ export class RAGSystem {
         }
 
         // Generate embeddings for chunks
-        const texts = chunks.map((chunk) => chunk.text);
+        const texts = chunks.map((chunk) => this.enhanceChunkForMatching(chunk));
         const { embeddings } = await embedMany({
           model: RAG_CONFIG.embeddingModel,
           values: texts,
@@ -255,6 +262,73 @@ export class RAGSystem {
   }
 
   /**
+   * Calculate section priority score
+   */
+  private getSectionPriority(sectionType: string | null): number {
+    if (!sectionType) return 0;
+
+    const section = sectionType.toLowerCase();
+
+    // Professional experience gets highest priority
+    if (section.includes('experience') || section.includes('professional')) return 0.15;
+
+    // Technical skills and projects are also important
+    if (section.includes('technical') || section.includes('skills')) return 0.10;
+    if (section.includes('project')) return 0.08;
+
+    // Education and other sections get lower priority
+    if (section.includes('education')) return 0.05;
+
+    return 0;
+  }
+
+  /**
+   * Calculate query relevance multiplier based on semantic score
+   */
+  private getSemanticRelevanceMultiplier(semanticScore: number): number {
+    // If semantic score is high, apply full boosts
+    if (semanticScore >= 0.7) return 1.0;
+
+    // If semantic score is medium, apply partial boosts  
+    if (semanticScore >= 0.5) return 0.8;
+
+    // If semantic score is low, reduce the impact of other boosts
+    if (semanticScore >= 0.3) return 0.6;
+
+    // Very low semantic scores get minimal boosts
+    return 0.3;
+  }
+
+  /**
+   * Calculate combined relevance score
+   */
+  private calculateCombinedScore(
+    semanticScore: number,
+    recencyScore: number,
+    isCurrentRole: boolean,
+    sectionType: string | null
+  ): number {
+    let score = semanticScore;
+
+    // Get semantic relevance multiplier to balance boosts
+    const semanticMultiplier = this.getSemanticRelevanceMultiplier(semanticScore);
+
+    // Apply recency boost (scaled by semantic relevance)
+    score = score + (recencyScore * 0.2 * semanticMultiplier);
+
+    // Extra boost for current roles (scaled by semantic relevance)
+    if (isCurrentRole) {
+      score = score + (0.1 * semanticMultiplier);
+    }
+
+    // Apply section priority boost (scaled by semantic relevance)
+    score = score + (this.getSectionPriority(sectionType) * semanticMultiplier);
+
+    // Cap the score at 1.0
+    return Math.min(score, 1.0);
+  }
+
+  /**
    * Query the RAG system
    */
   async query(
@@ -265,11 +339,7 @@ export class RAGSystem {
       filter?: Record<string, any>;
     } = {},
   ): Promise<Array<{ text: string; metadata: any; score: number }>> {
-    const {
-      topK = RAG_CONFIG.topK,
-      minScore = RAG_CONFIG.minScore,
-      filter,
-    } = options;
+    const { topK = RAG_CONFIG.topK, minScore = RAG_CONFIG.minScore, filter } = options;
 
     try {
       // Generate embedding for the query
@@ -278,20 +348,45 @@ export class RAGSystem {
         values: [query],
       });
 
-      // Query the vector store
+      // Query the vector store with higher topK to get more candidates for reranking
+      const candidateTopK = Math.max(topK * 2, 20);
       const results = await this.vectorStore.query({
         indexName: this.indexName,
         queryVector: embeddings[0],
-        topK,
+        topK: candidateTopK,
         filter,
-        minScore,
+        minScore: Math.max(minScore - 0.1, 0.1), // Lower threshold for candidates
       });
 
-      return results.map((result) => ({
-        text: result.metadata?.text || "",
-        metadata: result.metadata || {},
-        score: result.score,
-      }));
+      // Re-rank results with combined scoring
+      const rerankedResults = results
+        .map((result) => {
+          const semanticScore = result.score;
+          const recencyScore = result.metadata?.recencyScore || 0;
+          const isCurrentRole = result.metadata?.isCurrentRole || false;
+          const sectionType = result.metadata?.section || result.metadata?.title;
+
+          const combinedScore = this.calculateCombinedScore(
+            semanticScore,
+            recencyScore,
+            isCurrentRole,
+            sectionType
+          );
+
+          return {
+            text: result.metadata?.text || "",
+            metadata: {
+              ...result.metadata,
+              originalScore: semanticScore,
+            },
+            score: combinedScore,
+          };
+        })
+        .filter(result => result.score >= minScore) // Apply final threshold
+        .sort((a, b) => b.score - a.score) // Sort by combined score
+        .slice(0, topK); // Take final topK
+
+      return rerankedResults;
     } catch (error) {
       console.error("Error querying RAG system:", error);
       return [];
@@ -340,6 +435,140 @@ export class RAGSystem {
       console.error("Error clearing RAG system:", error);
       throw error;
     }
+  }
+
+  /**
+   * Extract dates from text content (for work experience sections)
+   */
+  private extractDates(
+    text: string,
+    metadata: any,
+  ): {
+    startYear: number | null;
+    endYear: number | null;
+    isCurrentRole: boolean;
+  } {
+    // Look for date patterns like "March 2025 - Present", "2020 - 2024", "October 2022 - October 2024"
+    const datePatterns = [
+      /(\w+\s+)?\d{4}\s*-\s*Present/i,
+      /(\w+\s+)?\d{4}\s*-\s*(\w+\s+)?\d{4}/i,
+      /\*(\w+\s+)?\d{4}\s*-\s*Present\*/i,
+      /\*(\w+\s+)?\d{4}\s*-\s*(\w+\s+)?\d{4}\*/i,
+    ];
+
+    let startYear: number | null = null;
+    let endYear: number | null = null;
+    let isCurrentRole = false;
+
+    for (const pattern of datePatterns) {
+      const match = text.match(pattern);
+      if (match) {
+        const fullMatch = match[0];
+
+        // Check if it's a current role
+        if (fullMatch.toLowerCase().includes("present")) {
+          isCurrentRole = true;
+          endYear = new Date().getFullYear();
+        }
+
+        // Extract years
+        const yearMatches = fullMatch.match(/\d{4}/g);
+        if (yearMatches && yearMatches.length > 0) {
+          startYear = Number.parseInt(yearMatches[0]);
+          if (yearMatches.length > 1 && !isCurrentRole) {
+            endYear = Number.parseInt(yearMatches[1]);
+          }
+        }
+        break;
+      }
+    }
+
+    return { startYear, endYear, isCurrentRole };
+  }
+
+  /**
+   * Calculate recency score (0-1, higher for more recent experiences)
+   */
+  private calculateRecencyScore(
+    startYear: number | null,
+    endYear: number | null,
+    isCurrentRole: boolean,
+  ): number {
+    if (!startYear) return 0;
+
+    const currentYear = new Date().getFullYear();
+    const effectiveEndYear = endYear || currentYear;
+
+    // Boost current roles
+    if (isCurrentRole) return 1.0;
+
+    // Calculate years since the role ended
+    const yearsSinceEnd = currentYear - effectiveEndYear;
+
+    // Exponential decay: roles from last 2 years get high scores
+    if (yearsSinceEnd <= 2) return 0.9;
+    if (yearsSinceEnd <= 5) return 0.7;
+    if (yearsSinceEnd <= 10) return 0.5;
+    return 0.3;
+  }
+
+  /**
+   * Extract and enhance keywords from job titles and descriptions
+   */
+  private extractJobKeywords(text: string, metadata: any): string[] {
+    const keywords: string[] = [];
+
+    // Extract job titles and clean them
+    const jobTitlePatterns = [
+      /### ([^|]+) \|/g, // "### Tre | Frontend Developer Lead"
+      /Frontend Developer/gi,
+      /Web Developer/gi,
+      /Software Engineer/gi,
+      /Developer/gi,
+      /Engineer/gi,
+      /Lead/gi,
+      /Senior/gi,
+      /Principal/gi,
+    ];
+
+    jobTitlePatterns.forEach(pattern => {
+      const matches = text.matchAll(pattern);
+      for (const match of matches) {
+        if (match[1]) {
+          keywords.push(match[1].trim());
+        } else {
+          keywords.push(match[0].replace(/[^a-zA-Z\s]/g, '').trim());
+        }
+      }
+    });
+
+    // Extract technology keywords
+    const techKeywords: string[] = [
+      'React', 'TypeScript', 'JavaScript', 'Node.js', 'Next.js', 'Vue',
+      'Angular', 'Frontend', 'Backend', 'Fullstack', 'Web3', 'Blockchain',
+      'HTML', 'CSS', 'SCSS', 'Tailwind', 'Styled Components',
+      'GraphQL', 'REST', 'API', 'MongoDB', 'PostgreSQL',
+    ];
+
+    techKeywords.forEach(tech => {
+      if (text.toLowerCase().includes(tech.toLowerCase())) {
+        keywords.push(tech);
+      }
+    });
+
+    return [...new Set(keywords)]; // Remove duplicates
+  }
+
+  /**
+   * Enhance chunk text with extracted keywords for better matching
+   */
+  private enhanceChunkForMatching(chunk: any): string {
+    const keywords = this.extractJobKeywords(chunk.text, chunk.metadata);
+
+    // Add keywords as searchable metadata at the end
+    const keywordString = keywords.length > 0 ? `\n\nKeywords: ${keywords.join(', ')}` : '';
+
+    return chunk.text + keywordString;
   }
 }
 

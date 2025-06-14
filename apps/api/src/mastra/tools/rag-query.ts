@@ -19,13 +19,6 @@ export const RAG_QUERY_TOOL = createTool({
     try {
       const { query, topK, minScore, filter } = context;
 
-      console.log({
-        query,
-        topK,
-        minScore,
-        filter,
-      })
-
       // Query the RAG system
       const results = await ragSystem.query(query, {
         topK,
@@ -47,9 +40,14 @@ export const RAG_QUERY_TOOL = createTool({
         rank: index + 1,
         content: result.text,
         relevanceScore: result.score,
+        originalScore: result.metadata.originalScore || result.score,
         source: result.metadata.source || "Unknown",
         fileType: result.metadata.fileType || "Unknown",
         section: result.metadata.title || result.metadata.section || null,
+        isCurrentRole: result.metadata.isCurrentRole || false,
+        startYear: result.metadata.startYear || null,
+        endYear: result.metadata.endYear || null,
+        recencyScore: result.metadata.recencyScore || 0,
       }));
 
       return {
