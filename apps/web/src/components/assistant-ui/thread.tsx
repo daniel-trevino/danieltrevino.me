@@ -23,6 +23,7 @@ import type { FC } from "react";
 import { MarkdownText } from "@/components/assistant-ui/markdown-text";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "motion/react";
 import { WordRotate } from "../magicui/word-rotate";
 import { ToolFallback } from "./tool-fallback";
@@ -219,13 +220,15 @@ const ThreadWelcomeSuggestions: FC = () => {
 };
 
 const Composer: FC = () => {
+	const isMobile = useIsMobile();
+
 	return (
 		<ComposerPrimitive.Root className="focus-within:border-ring/20 flex w-full flex-wrap items-end rounded-lg border bg-inherit px-2.5 shadow-sm transition-colors ease-in">
 			<ComposerPrimitive.Input
 				rows={1}
-				autoFocus
+				autoFocus={!isMobile}
 				placeholder="Write a message..."
-				className="placeholder:text-muted-foreground max-h-40 flex-grow resize-none border-none bg-transparent px-2 py-4 text-sm outline-none focus:ring-0 disabled:cursor-not-allowed"
+				className="placeholder:text-muted-foreground max-h-40 flex-grow resize-none border-none bg-transparent px-2 py-4 sm:text-sm text-base outline-none focus:ring-0 disabled:cursor-not-allowed"
 			/>
 			<ComposerAction />
 		</ComposerPrimitive.Root>
