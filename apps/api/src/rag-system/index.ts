@@ -5,8 +5,7 @@ import { embedMany } from "ai";
 import { config } from "dotenv";
 import "dotenv/config";
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import path, { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import path from "node:path";
 
 // Load environment variables
 if (process.env.NODE_ENV !== "production") {
@@ -16,7 +15,13 @@ if (process.env.NODE_ENV !== "production") {
 const connectionString = process.env
   .VECTOR_POSTGRES_CONNECTION_STRING as string;
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// Use a path relative to the project root instead of module location
+const ragSourceDocsPath = path.join(
+  process.cwd(),
+  "src",
+  "rag-system",
+  "source-documents",
+);
 
 // RAG Configuration
 interface RagConfig {
@@ -35,7 +40,7 @@ export const RAG_CONFIG: RagConfig = {
   dimension: 1536,
   chunkSize: 120,
   chunkOverlap: 40,
-  sourceDocsPath: join(__dirname, "source-documents"),
+  sourceDocsPath: ragSourceDocsPath,
   embeddingModel: openai.embedding("text-embedding-3-small"),
   topK: 10,
   minScore: 0.6,
@@ -201,13 +206,19 @@ export class RAGSystem {
           chunks.forEach((chunk) => {
             const headers = [];
             if (chunk.metadata.title) headers.push(`# ${chunk.metadata.title}`);
-            if (chunk.metadata.section) headers.push(`## ${chunk.metadata.section}`);
-            if (chunk.metadata.subsection) headers.push(`### ${chunk.metadata.subsection}`);
+            if (chunk.metadata.section)
+              headers.push(`## ${chunk.metadata.section}`);
+            if (chunk.metadata.subsection)
+              headers.push(`### ${chunk.metadata.subsection}`);
             chunk.text = `${headers.join("\n")}${headers.length ? "\n" : ""}${chunk.text}`;
 
             // Extract date information for experience sections
             const dateInfo = this.extractDates(chunk.text, chunk.metadata);
-            const recencyScore = this.calculateRecencyScore(dateInfo.startYear, dateInfo.endYear, dateInfo.isCurrentRole);
+            const recencyScore = this.calculateRecencyScore(
+              dateInfo.startYear,
+              dateInfo.endYear,
+              dateInfo.isCurrentRole,
+            );
 
             chunk.metadata.title = chunk.metadata.title || null;
             chunk.metadata.section = chunk.metadata.section || null;
@@ -225,7 +236,9 @@ export class RAGSystem {
         }
 
         // Generate embeddings for chunks
-        const texts = chunks.map((chunk) => this.enhanceChunkForMatching(chunk));
+        const texts = chunks.map((chunk) =>
+          this.enhanceChunkForMatching(chunk),
+        );
         const { embeddings } = await embedMany({
           model: RAG_CONFIG.embeddingModel,
           values: texts,
@@ -270,14 +283,15 @@ export class RAGSystem {
     const section = sectionType.toLowerCase();
 
     // Professional experience gets highest priority
-    if (section.includes('experience') || section.includes('professional')) return 0.15;
+    if (section.includes("experience") || section.includes("professional"))
+      return 0.15;
 
     // Technical skills and projects are also important
-    if (section.includes('technical') || section.includes('skills')) return 0.10;
-    if (section.includes('project')) return 0.08;
+    if (section.includes("technical") || section.includes("skills")) return 0.1;
+    if (section.includes("project")) return 0.08;
 
     // Education and other sections get lower priority
-    if (section.includes('education')) return 0.05;
+    if (section.includes("education")) return 0.05;
 
     return 0;
   }
@@ -289,7 +303,7 @@ export class RAGSystem {
     // If semantic score is high, apply full boosts
     if (semanticScore >= 0.7) return 1.0;
 
-    // If semantic score is medium, apply partial boosts  
+    // If semantic score is medium, apply partial boosts
     if (semanticScore >= 0.5) return 0.8;
 
     // If semantic score is low, reduce the impact of other boosts
@@ -306,23 +320,24 @@ export class RAGSystem {
     semanticScore: number,
     recencyScore: number,
     isCurrentRole: boolean,
-    sectionType: string | null
+    sectionType: string | null,
   ): number {
     let score = semanticScore;
 
     // Get semantic relevance multiplier to balance boosts
-    const semanticMultiplier = this.getSemanticRelevanceMultiplier(semanticScore);
+    const semanticMultiplier =
+      this.getSemanticRelevanceMultiplier(semanticScore);
 
     // Apply recency boost (scaled by semantic relevance)
-    score = score + (recencyScore * 0.2 * semanticMultiplier);
+    score = score + recencyScore * 0.2 * semanticMultiplier;
 
     // Extra boost for current roles (scaled by semantic relevance)
     if (isCurrentRole) {
-      score = score + (0.1 * semanticMultiplier);
+      score = score + 0.1 * semanticMultiplier;
     }
 
     // Apply section priority boost (scaled by semantic relevance)
-    score = score + (this.getSectionPriority(sectionType) * semanticMultiplier);
+    score = score + this.getSectionPriority(sectionType) * semanticMultiplier;
 
     // Cap the score at 1.0
     return Math.min(score, 1.0);
@@ -339,7 +354,11 @@ export class RAGSystem {
       filter?: Record<string, any>;
     } = {},
   ): Promise<Array<{ text: string; metadata: any; score: number }>> {
-    const { topK = RAG_CONFIG.topK, minScore = RAG_CONFIG.minScore, filter } = options;
+    const {
+      topK = RAG_CONFIG.topK,
+      minScore = RAG_CONFIG.minScore,
+      filter,
+    } = options;
 
     try {
       // Generate embedding for the query
@@ -364,13 +383,14 @@ export class RAGSystem {
           const semanticScore = result.score;
           const recencyScore = result.metadata?.recencyScore || 0;
           const isCurrentRole = result.metadata?.isCurrentRole || false;
-          const sectionType = result.metadata?.section || result.metadata?.title;
+          const sectionType =
+            result.metadata?.section || result.metadata?.title;
 
           const combinedScore = this.calculateCombinedScore(
             semanticScore,
             recencyScore,
             isCurrentRole,
-            sectionType
+            sectionType,
           );
 
           return {
@@ -382,7 +402,7 @@ export class RAGSystem {
             score: combinedScore,
           };
         })
-        .filter(result => result.score >= minScore) // Apply final threshold
+        .filter((result) => result.score >= minScore) // Apply final threshold
         .sort((a, b) => b.score - a.score) // Sort by combined score
         .slice(0, topK); // Take final topK
 
@@ -531,26 +551,44 @@ export class RAGSystem {
       /Principal/gi,
     ];
 
-    jobTitlePatterns.forEach(pattern => {
+    jobTitlePatterns.forEach((pattern) => {
       const matches = text.matchAll(pattern);
       for (const match of matches) {
         if (match[1]) {
           keywords.push(match[1].trim());
         } else {
-          keywords.push(match[0].replace(/[^a-zA-Z\s]/g, '').trim());
+          keywords.push(match[0].replace(/[^a-zA-Z\s]/g, "").trim());
         }
       }
     });
 
     // Extract technology keywords
     const techKeywords: string[] = [
-      'React', 'TypeScript', 'JavaScript', 'Node.js', 'Next.js', 'Vue',
-      'Angular', 'Frontend', 'Backend', 'Fullstack', 'Web3', 'Blockchain',
-      'HTML', 'CSS', 'SCSS', 'Tailwind', 'Styled Components',
-      'GraphQL', 'REST', 'API', 'MongoDB', 'PostgreSQL',
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "Node.js",
+      "Next.js",
+      "Vue",
+      "Angular",
+      "Frontend",
+      "Backend",
+      "Fullstack",
+      "Web3",
+      "Blockchain",
+      "HTML",
+      "CSS",
+      "SCSS",
+      "Tailwind",
+      "Styled Components",
+      "GraphQL",
+      "REST",
+      "API",
+      "MongoDB",
+      "PostgreSQL",
     ];
 
-    techKeywords.forEach(tech => {
+    techKeywords.forEach((tech) => {
       if (text.toLowerCase().includes(tech.toLowerCase())) {
         keywords.push(tech);
       }
@@ -566,7 +604,8 @@ export class RAGSystem {
     const keywords = this.extractJobKeywords(chunk.text, chunk.metadata);
 
     // Add keywords as searchable metadata at the end
-    const keywordString = keywords.length > 0 ? `\n\nKeywords: ${keywords.join(', ')}` : '';
+    const keywordString =
+      keywords.length > 0 ? `\n\nKeywords: ${keywords.join(", ")}` : "";
 
     return chunk.text + keywordString;
   }
