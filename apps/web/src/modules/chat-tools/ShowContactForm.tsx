@@ -15,9 +15,10 @@ import { useLocalStorage } from "@/hooks/use-local-storage";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { showContactForm } from "@repo/tools/show-contact-form";
+import { useMutation } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -45,8 +46,8 @@ export const ShowContactFormTool = makeAssistantToolUI<
 			"submitted-contact-forms",
 			[],
 		);
-		const [isSubmitting, setIsSubmitting] = useState(false);
 
+		console.log({ formId });
 		// Check if this form was already submitted
 		const isSubmitted = submittedFormIds.includes(formId);
 
@@ -57,6 +58,43 @@ export const ShowContactFormTool = makeAssistantToolUI<
 				name: "",
 				phone: "",
 				message: "",
+			},
+		});
+
+		// Contact form submission mutation
+		const submitContactFormMutation = useMutation({
+			mutationFn: async (data: ContactFormData) => {
+				// Prevent duplicate submissions
+				if (submittedFormIds.includes(formId)) {
+					throw new Error("Form already submitted");
+				}
+
+				const response = await fetch("/api/contact", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						...data,
+						formId: formId,
+					}),
+				});
+
+				if (!response.ok) {
+					const errorData = await response.json();
+					throw new Error(errorData.error || "Failed to send message");
+				}
+
+				return response.json();
+			},
+			onSuccess: (result) => {
+				console.log("Contact form submitted successfully:", result);
+				// Mark form as submitted in localStorage
+				setSubmittedFormIds((prev) => [...prev, formId]);
+			},
+			onError: (error: Error) => {
+				console.error("Error submitting contact form:", error);
+				// Error handling - the error state will be handled by the mutation
 			},
 		});
 
@@ -73,27 +111,7 @@ export const ShowContactFormTool = makeAssistantToolUI<
 		}, [args, form, isSubmitted]);
 
 		const onSubmit = async (data: ContactFormData) => {
-			// Prevent duplicate submissions
-			if (submittedFormIds.includes(formId)) {
-				console.log(
-					`Form [${formId}] already submitted, ignoring duplicate submission`,
-				);
-				return;
-			}
-
-			setIsSubmitting(true);
-			console.log(
-				`TODO: Make API request to submit contact form [${formId}]`,
-				data,
-			);
-			// TODO: Make API request to submit contact form
-
-			// Simulate API call
-			await new Promise((resolve) => setTimeout(resolve, 1000));
-
-			// Mark form as submitted in localStorage
-			setSubmittedFormIds((prev) => [...prev, formId]);
-			setIsSubmitting(false);
+			submitContactFormMutation.mutate(data);
 		};
 
 		if (status.type === "running") {
@@ -252,12 +270,20 @@ export const ShowContactFormTool = makeAssistantToolUI<
 										)}
 									/>
 
+									{/* Show error message if mutation failed */}
+									{submitContactFormMutation.isError && (
+										<div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md p-3">
+											{submitContactFormMutation.error?.message ||
+												"Failed to send message. Please try again."}
+										</div>
+									)}
+
 									<Button
 										type="submit"
 										className="w-full"
-										disabled={isSubmitting}
+										disabled={submitContactFormMutation.isPending}
 									>
-										{isSubmitting ? (
+										{submitContactFormMutation.isPending ? (
 											<>
 												<Loader2 className="h-4 w-4 animate-spin mr-2" />
 												Sending...
