@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { ChatContextProvider } from "@/modules/chat/ChatContext";
 import { ThreadSidebar } from "@/modules/thread/ThreadSidebar";
+import { AnalyticsScript } from "@/services/analytics";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
@@ -32,6 +33,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<AnalyticsScript />
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>

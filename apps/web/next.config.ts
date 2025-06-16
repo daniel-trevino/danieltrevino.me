@@ -9,6 +9,18 @@ const nextConfig: NextConfig = {
     };
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/script.js',
+        destination: 'https://a.cerebro.top/script.js'
+      },
+      {
+        source: '/api/send',
+        destination: 'https://a.cerebro.top/api/send'
+      }
+    ];
+  },
 };
 
 export default nextConfig;

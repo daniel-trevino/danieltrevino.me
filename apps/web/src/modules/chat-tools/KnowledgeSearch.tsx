@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useAnalytics } from "@/services/analytics";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { Brain } from "lucide-react";
 
@@ -31,6 +32,14 @@ export const KnowledgeSearchTool = makeAssistantToolUI<
 	toolName: "queryDocuments",
 	render: ({ status, result }) => {
 		const Component = ({ isLoading }: { isLoading: boolean }) => {
+			const { trackEvent } = useAnalytics();
+
+			if (result && result.resultCount === 0) {
+				trackEvent("knowledge_search_missed", {
+					query: result.query,
+				});
+			}
+
 			return (
 				<div className="rounded-lg border bg-card p-2 md:p-6 shadow-sm my-2">
 					<div className="flex items-center gap-4">
