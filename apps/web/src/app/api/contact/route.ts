@@ -1,3 +1,5 @@
+import { db } from "@/db/client";
+import { contactFormSubmissions } from "@/db/schema";
 import { type NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
@@ -13,6 +15,7 @@ const contactFormSchema = z.object({
   phone: z.string().optional(),
   message: z.string().optional(),
   formId: z.string().optional(),
+  resourceId: z.string(),
 });
 
 // Create reusable transporter object using SMTP transport
@@ -99,6 +102,16 @@ Submitted at: ${new Date().toISOString()}
 
     // Send email
     const info = await transporter.sendMail(mailOptions);
+
+    // Save to DB
+    await db.insert(contactFormSubmissions).values({
+      userId: validatedData.resourceId,
+      formId: validatedData.formId || "",
+      email: validatedData.email,
+      name: validatedData.name,
+      phone: validatedData.phone,
+      message: validatedData.message,
+    });
 
     console.log("Contact form email sent:", info.messageId);
 

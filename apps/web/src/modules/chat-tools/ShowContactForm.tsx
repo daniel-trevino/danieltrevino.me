@@ -11,11 +11,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useLocalStorage } from "@/hooks/use-local-storage";
+import { useResourceId } from "@/hooks/use-resource-id";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { showContactForm } from "@repo/tools/show-contact-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, Loader2 } from "lucide-react";
 import { useEffect } from "react";
@@ -42,14 +42,28 @@ export const ShowContactFormTool = makeAssistantToolUI<
 	toolName: showContactForm.id,
 	render: ({ args, status, result }) => {
 		const formId = result?.uniqueId || "contact-form";
-		const [submittedFormIds, setSubmittedFormIds] = useLocalStorage<string[]>(
-			"submitted-contact-forms",
-			[],
-		);
+		const [resourceId] = useResourceId();
 
-		console.log({ formId });
-		// Check if this form was already submitted
-		const isSubmitted = submittedFormIds.includes(formId);
+		// Fetch all submitted formIds for this resourceId
+		const {
+			data: submittedFormIds,
+			isLoading: isSubmittedFormsLoading,
+			refetch: refetchSubmittedForms,
+		} = useQuery({
+			queryKey: ["submitted-contact-forms", resourceId],
+			queryFn: async () => {
+				if (!resourceId) return [];
+				const res = await fetch(
+					`/api/contact/check?resourceId=${encodeURIComponent(resourceId)}`,
+				);
+				if (!res.ok) return [];
+				const data = await res.json();
+				return data.formIds || [];
+			},
+			enabled: !!resourceId,
+		});
+
+		const isSubmitted = submittedFormIds?.includes(formId);
 
 		const form = useForm<ContactFormData>({
 			resolver: zodResolver(contactFormSchema),
@@ -64,11 +78,6 @@ export const ShowContactFormTool = makeAssistantToolUI<
 		// Contact form submission mutation
 		const submitContactFormMutation = useMutation({
 			mutationFn: async (data: ContactFormData) => {
-				// Prevent duplicate submissions
-				if (submittedFormIds.includes(formId)) {
-					throw new Error("Form already submitted");
-				}
-
 				const response = await fetch("/api/contact", {
 					method: "POST",
 					headers: {
@@ -77,6 +86,7 @@ export const ShowContactFormTool = makeAssistantToolUI<
 					body: JSON.stringify({
 						...data,
 						formId: formId,
+						resourceId,
 					}),
 				});
 
@@ -88,13 +98,10 @@ export const ShowContactFormTool = makeAssistantToolUI<
 				return response.json();
 			},
 			onSuccess: (result) => {
-				console.log("Contact form submitted successfully:", result);
-				// Mark form as submitted in localStorage
-				setSubmittedFormIds((prev) => [...prev, formId]);
+				refetchSubmittedForms(); // Refetch the list after successful submission
 			},
 			onError: (error: Error) => {
 				console.error("Error submitting contact form:", error);
-				// Error handling - the error state will be handled by the mutation
 			},
 		});
 
