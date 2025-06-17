@@ -21,6 +21,9 @@ export async function POST(req: Request) {
 
   return new Response(backendResponse.body, {
     status: backendResponse.status,
-    headers: backendResponse.headers
+    headers: {
+      ...backendResponse.headers,
+      "Content-Type": "text/event-stream", // Force stream when hosting on Vercel
+    }
   });
 }
