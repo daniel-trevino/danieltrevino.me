@@ -1,5 +1,6 @@
 import { mastraClient } from "@/services/mastra-client";
 
+export const runtime = "edge";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
