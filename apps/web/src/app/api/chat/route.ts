@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   // We only need to send the last message to the mastra backend
   const lastMessage = messages[messages.length - 1];
 
-  const backendResponse = await mastraClient(`/api/agents/${agentId}/stream`, {
+  return mastraClient(`/api/agents/${agentId}/stream`, {
     method: "POST",
     body: {
       messages: lastMessage,
@@ -17,10 +17,5 @@ export async function POST(req: Request) {
       threadId,
     },
     signal: req.signal,
-  });
-
-  return new Response(backendResponse.body, {
-    status: backendResponse.status,
-    headers: backendResponse.headers
   });
 }
