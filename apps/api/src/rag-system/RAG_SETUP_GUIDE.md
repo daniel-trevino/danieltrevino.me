@@ -93,7 +93,7 @@ npm run rag-clear    # Clear and reprocess all documents
 
 The assistant agent now has access to two new tools:
 
-#### `queryDocuments` Tool
+#### `knowledge_search` Tool
 Searches through processed documents for relevant information.
 
 **Example queries:**
@@ -139,7 +139,7 @@ export const RAG_CONFIG = {
 ### Assistant Agent Instructions
 
 The agent is configured to:
-- **Always use `queryDocuments` first** when answering questions about Daniel's experience
+- **Always use `knowledge_search` first** when answering questions about Daniel's experience
 - **Use specific search terms** related to the user's question
 - **Present search results with confidence scores**
 - **Cite sources** when using information from document search
@@ -176,7 +176,7 @@ await ragSystem.clearDocuments();
 ```typescript
 // The assistant agent automatically has access to these tools:
 {
-  queryDocuments: RAG_QUERY_TOOL,      // Search documents
+  knowledge_search: RAG_QUERY_TOOL,      // Search documents
   getDocumentStats: RAG_STATS_TOOL,    // Get database stats
 }
 ```

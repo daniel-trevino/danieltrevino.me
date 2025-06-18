@@ -16,10 +16,15 @@ export function AnalyticsScript() {
 	);
 }
 
+export const analyticsEvents = {
+	prompt_suggestion_clicked: "prompt_suggestion_clicked",
+	knowledge_search_missed: "knowledge_search_missed",
+} as const;
+
 export function useAnalytics() {
 	const [resourceId] = useResourceId();
 
-	const trackEvent = (event: string, data?: Record<string, unknown>) => {
+	const trackEvent = (event: (typeof analyticsEvents)[keyof typeof analyticsEvents], data?: Record<string, unknown>) => {
 		if (typeof window === "undefined" || !(window as any).umami) {
 			return;
 		}

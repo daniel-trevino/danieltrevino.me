@@ -5,5 +5,5 @@ export type Tool = {
   description: string;
   inputSchema: z.ZodSchema;
   outputSchema: z.ZodSchema;
-  output: Record<string, unknown>;
+  output?: Record<string, unknown>;
 };

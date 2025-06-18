@@ -3,38 +3,20 @@
 import { cn } from "@/lib/utils";
 import { useAnalytics } from "@/services/analytics";
 import { makeAssistantToolUI } from "@assistant-ui/react";
+import { knowledgeSearch } from "@repo/tools";
 import { Brain } from "lucide-react";
-
-type KnowledgeSearchArgs = {
-	query: string;
-	topK: number;
-	minScore: number;
-};
-
-type KnowledgeSearchResult = {
-	success: boolean;
-	query: string;
-	resultCount: number;
-	results: {
-		rank: number;
-		content: string;
-		relevanceScore: number;
-		source: string; // The file name
-		fileType: string; // The file type / format
-		section: string; // The section of the document that the result is from
-	}[];
-};
+import type { z } from "zod";
 
 export const KnowledgeSearchTool = makeAssistantToolUI<
-	KnowledgeSearchArgs,
-	KnowledgeSearchResult
+	z.infer<typeof knowledgeSearch.inputSchema>,
+	z.infer<typeof knowledgeSearch.outputSchema>
 >({
-	toolName: "queryDocuments",
+	toolName: knowledgeSearch.id,
 	render: ({ status, result }) => {
 		const Component = ({ isLoading }: { isLoading: boolean }) => {
 			const { trackEvent } = useAnalytics();
 
-			if (result && result.resultCount === 0) {
+			if (result && result.success === false) {
 				trackEvent("knowledge_search_missed", {
 					query: result.query,
 				});

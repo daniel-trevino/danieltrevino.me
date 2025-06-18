@@ -72,7 +72,7 @@ async function main() {
 
     console.log("\n🎉 RAG system is ready!");
     console.log(
-      "💡 The assistant agent can now use the queryDocuments tool to search through your documents.",
+      "💡 The assistant agent can now use the knowledge_search tool to search through your documents.",
     );
   } catch (error) {
     console.error("❌ Error during document processing:", error);

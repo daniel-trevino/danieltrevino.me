@@ -6,6 +6,7 @@ import {
     getLinkedinUrl,
     getResumeUrl,
     getXUrl,
+    knowledgeSearch,
 } from "@repo/tools";
 import { showContactForm } from "@repo/tools/show-contact-form";
 import { memory } from "../lib/memory";
@@ -14,7 +15,7 @@ import { getGithubUrlTool } from "../tools/get-github-url";
 import { getLinkedinUrlTool } from "../tools/get-linkedin-url";
 import { getResumeUrlTool } from "../tools/get-resume-url";
 import { getXUrlTool } from "../tools/get-x-url";
-import { RAG_QUERY_TOOL } from "../tools/rag-query";
+import { knowledgeSearchTool } from "../tools/knowledge-search";
 import { showContactFormTool } from "../tools/show-contact-form";
 
 const mcp = new MCPClient({
@@ -46,11 +47,11 @@ export const assistantAgent = new Agent({
     - Understanding of his technical skills and expertise
     - Familiarity with his career progression and achievements
     - Ability to highlight relevant experience based on specific queries
-    - Can search through Daniel's CV documents using the queryDocuments tool
+    - Can search through Daniel's CV documents using the ${knowledgeSearch.id} tool
     - When using show_contact_form tool, you will be showing a contact form to the user but hey have to manually fill it if there is any details missing and submit it.
 
     IMPORTANT TOOL USAGE:
-    - ALWAYS use the queryDocuments tool first when answering ANY question about Daniel.
+    - ALWAYS use the ${knowledgeSearch.id} tool first when answering ANY question about Daniel.
     - Use specific search terms related to the user's question (e.g., "frontend experience", "React projects", "team leadership")
     - Present the search results as factual information with confidence scores
     - If no relevant information is found in documents, acknowledge this limitation
@@ -77,7 +78,7 @@ export const assistantAgent = new Agent({
     - Decline to answer questions about private or personal matters
 
     When responding to queries:
-    - First search documents using queryDocuments tool with relevant keywords
+    - First search documents using ${knowledgeSearch.id} tool with relevant keywords
     - Prioritize accuracy and relevance based on search results
     - Provide specific examples from Daniel's experience
     - Connect different aspects of his career when relevant
@@ -95,7 +96,7 @@ export const assistantAgent = new Agent({
             [getXUrl.id]: getXUrlTool,
             [getResumeUrl.id]: getResumeUrlTool,
             crawlWebpageTool,
-            queryDocuments: RAG_QUERY_TOOL,
+            [knowledgeSearch.id]: knowledgeSearchTool,
             [showContactForm.id]: showContactFormTool,
         };
     },

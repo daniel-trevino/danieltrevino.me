@@ -24,6 +24,7 @@ import { MarkdownText } from "@/components/assistant-ui/markdown-text";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useAnalytics } from "@/services/analytics";
 import { motion } from "motion/react";
 import { WordRotate } from "../magicui/word-rotate";
 import { ToolFallback } from "./tool-fallback";
@@ -107,6 +108,8 @@ const ThreadWelcome: FC = () => {
 };
 
 const ThreadWelcomeSuggestions: FC = () => {
+	const { trackEvent } = useAnalytics();
+
 	const suggestions = [
 		"Tell me about Daniel Treviño Bergman",
 		"What is his professional experience?",
@@ -145,13 +148,14 @@ const ThreadWelcomeSuggestions: FC = () => {
 						<motion.div
 							key={prompt}
 							variants={item}
-							className="flex-1 min-w-0 max-w-xs"
+							className="flex-1 min-w-0 max-w-lg"
 						>
 							<ThreadPrimitive.Suggestion
 								className="hover:bg-muted/80 grid place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
 								prompt={prompt}
 								method="replace"
 								autoSend
+								onClick={() => trackEvent('prompt_suggestion_clicked', { prompt })}
 							>
 								<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
 									{prompt}
@@ -170,7 +174,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 						<motion.div
 							key={prompt}
 							variants={item}
-							className="flex-1 min-w-0 max-w-xs"
+							className="flex-1 min-w-0 max-w-lg"
 						>
 							<ThreadPrimitive.Suggestion
 								className="hover:bg-muted/80 grid place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"

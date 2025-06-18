@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<AnalyticsScript />
+			{process.env.NODE_ENV === "production" && <AnalyticsScript />}
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
