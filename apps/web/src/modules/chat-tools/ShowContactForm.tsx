@@ -287,7 +287,7 @@ export const ShowContactFormTool = makeAssistantToolUI<
 
 									<Button
 										type="submit"
-										className="w-full"
+										className="w-full cursor-pointer"
 										disabled={submitContactFormMutation.isPending}
 									>
 										{submitContactFormMutation.isPending ? (
