@@ -135,7 +135,7 @@ export const ShowContactFormTool = makeAssistantToolUI<
 		}
 
 		return (
-			<div className="max-w-md mb-4">
+			<div className="max-w-md my-4">
 				<AnimatePresence mode="wait">
 					{isSubmitted ? (
 						<motion.div
