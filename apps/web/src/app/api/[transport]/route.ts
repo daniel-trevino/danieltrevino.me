@@ -11,7 +11,7 @@ const handler = createMcpHandler(
       },
       async () => {
         return {
-          content: [{ type: 'text', text: getGithubUrl.output.url as string }],
+          content: [{ type: 'text', text: getGithubUrl?.output?.url as string }],
         };
       }
     )
@@ -23,7 +23,7 @@ const handler = createMcpHandler(
       },
       async () => {
         return {
-          content: [{ type: 'text', text: getLinkedinUrl.output.url as string }],
+          content: [{ type: 'text', text: getLinkedinUrl?.output?.url as string }],
         };
       }
     )
@@ -35,7 +35,7 @@ const handler = createMcpHandler(
       },
       async () => {
         return {
-          content: [{ type: 'text', text: getXUrl.output.url as string }],
+          content: [{ type: 'text', text: getXUrl?.output?.url as string }],
         };
       }
     )
@@ -47,7 +47,7 @@ const handler = createMcpHandler(
       },
       async () => {
         return {
-          content: [{ type: 'text', text: getResumeUrl.output.url as string }],
+          content: [{ type: 'text', text: getResumeUrl?.output?.url as string }],
         };
       }
     )
