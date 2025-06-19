@@ -22,11 +22,11 @@
     }
   },
   "scripts": {
-    "build": "bunchee && pnpm prepare",
+    "build": "bunchee && pnpm copy-resume",
     "dev": "bunchee --watch",
     "check-types": "tsc --noEmit",
     "test": "jest",
-    "prepare": "cp src/data/daniel-resume-2025.md dist/es/daniel-resume-2025.md && cp src/data/daniel-resume-2025.md dist/cjs/daniel-resume-2025.md"
+    "copy-resume": "cp src/data/daniel-resume-2025.md dist/es/daniel-resume-2025.md && cp src/data/daniel-resume-2025.md dist/cjs/daniel-resume-2025.md"
   },
   "jest": {
     "preset": "@repo/jest-presets/node"

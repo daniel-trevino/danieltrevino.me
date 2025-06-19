@@ -14,6 +14,9 @@
       "@repo/tools": [
         "../../packages/tools/src/index"
       ],
+      "@repo/resume": [
+        "../../packages/resume/src/index"
+      ],
       "@repo/tools/*": [
         "../../packages/tools/src/*"
       ]
