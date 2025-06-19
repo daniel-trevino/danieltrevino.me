@@ -2,6 +2,7 @@
 import {
 	Sidebar,
 	SidebarContent,
+	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupContent,
 	SidebarGroupLabel,
@@ -11,6 +12,7 @@ import {
 	useSidebar,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
+import { UserMenu } from "@/components/UserMenu";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DeleteThreadForm } from "@/modules/thread/DeleteThreadForm";
 import { RenameThreadForm } from "@/modules/thread/RenameThreadForm";
@@ -176,6 +178,14 @@ export function ThreadSidebar() {
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
+
+			<SidebarFooter>
+				<SidebarMenu>
+					<SidebarMenuItem>
+						<UserMenu />
+					</SidebarMenuItem>
+				</SidebarMenu>
+			</SidebarFooter>
 
 			<DeleteThreadForm
 				open={!!deleteThreadId}

@@ -6,9 +6,11 @@ import { ChatContextProvider } from "@/modules/chat/ChatContext";
 import { ThreadSidebar } from "@/modules/thread/ThreadSidebar";
 import { AnalyticsScript } from "@/services/analytics";
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
+
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -38,42 +40,50 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			{process.env.NODE_ENV === "production" && <AnalyticsScript />}
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<QueryClientProvider>
-					<ChatContextProvider>
-						<SidebarCustomProvider>
-							<ThreadSidebar />
-							<div className="flex flex-col w-full">
-								<div className="flex items-center justify-between">
-									<div className="flex items-center justify-between gap-3 border-b w-full p-4">
-										<SidebarTrigger />
-										<div className="flex flex-col gap-1">
-											<h1 className="font-bold text-2xl md:text-3xl">
-												Daniel Treviño Bergman
-											</h1>
-											<p className="text-sm text-muted-foreground">
-												Senior Software Engineer
-											</p>
+				<ThemeProvider
+					attribute="class"
+					disableTransitionOnChange
+					enableSystem
+					defaultTheme="system"
+					themes={["system", "light", "dark"]}
+				>
+					<QueryClientProvider>
+						<ChatContextProvider>
+							<SidebarCustomProvider>
+								<ThreadSidebar />
+								<div className="flex flex-col w-full">
+									<div className="flex items-center justify-between">
+										<div className="flex items-center justify-between gap-3 border-b w-full p-4">
+											<SidebarTrigger />
+											<div className="flex flex-col gap-1">
+												<h1 className="font-bold text-2xl md:text-3xl">
+													Daniel Treviño Bergman
+												</h1>
+												<p className="text-sm text-muted-foreground">
+													Senior Software Engineer
+												</p>
+											</div>
+											<Link href="/about">
+												<Button variant="outline" className="cursor-pointer">
+													About
+												</Button>
+											</Link>
 										</div>
-										<Link href="/about">
-											<Button variant="outline" className="cursor-pointer">
-												About
-											</Button>
-										</Link>
+									</div>
+
+									<div className="flex-1 md:pt-0 w-full max-w-7xl mx-auto px-4">
+										{children}
 									</div>
 								</div>
-
-								<div className="flex-1 md:pt-0 w-full max-w-7xl mx-auto px-4">
-									{children}
-								</div>
-							</div>
-						</SidebarCustomProvider>
-					</ChatContextProvider>
-				</QueryClientProvider>
+							</SidebarCustomProvider>
+						</ChatContextProvider>
+					</QueryClientProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	);
