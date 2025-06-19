@@ -22,6 +22,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
 	title: "Daniel Treviño Bergman",
+	openGraph: {
+		title: "Daniel Treviño Bergman",
+		description:
+			"Chat with Daniel's AI Agent which can provide information about his professional background, projects, and more.",
+		images: ["/og-image.png"],
+	},
 	description:
 		"Chat with Daniel's AI Agent which can provide information about his professional background, projects, and more.",
 };
