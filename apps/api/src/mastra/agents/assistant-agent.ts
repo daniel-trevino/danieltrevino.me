@@ -1,13 +1,12 @@
 import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { MCPClient } from "@mastra/mcp";
-import { resumeMarkdown } from '@repo/resume';
 import {
-    getGithubUrl,
+    danielResume2025Markdown, getGithubUrl,
     getLinkedinUrl,
     getResumeUrl,
     getXUrl
-} from "@repo/tools";
+} from '@repo/tools';
 import { showContactForm } from "@repo/tools/show-contact-form";
 import { memory } from "../lib/memory";
 import { crawlWebpageTool } from "../tools/crawl-webpage";
@@ -57,7 +56,7 @@ export const assistantAgent = new Agent({
     - Be concise but thorough in responses
     - Structure information in a clear, digestible format
     - Use relevant examples and specific details when appropriate
-    - Always cite sources when using information from document search
+    - When listing information about a company, render in the HTML, the url and also the logo of the company.
 
     RESPONSE STRUCTURE:
     1. Direct answer to the query using document search results
@@ -81,7 +80,7 @@ export const assistantAgent = new Agent({
 
 
     DANIEL'S Resume:
-    ${resumeMarkdown}
+    ${danielResume2025Markdown}
     `,
     model: openai("gpt-4o-mini"),
     memory,

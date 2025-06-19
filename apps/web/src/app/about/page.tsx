@@ -1,3 +1,5 @@
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { mcpServerTools } from '@repo/tools';
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -68,6 +70,19 @@ export default function AboutPage() {
 							</span>
 						</li>
 					</ul>
+
+					{/* MCP Tools List */}
+					<div className="mt-6">
+						<p className="font-semibold text-lg text-foreground mb-2">Available Tools:</p>
+						<Accordion type="single" collapsible>
+							{mcpServerTools.map((tool) => (
+								<AccordionItem key={tool.id} value={tool.id}>
+									<AccordionTrigger>{tool.id}</AccordionTrigger>
+									<AccordionContent>{tool.description}</AccordionContent>
+								</AccordionItem>
+							))}
+						</Accordion>
+					</div>
 				</div>
 			</section>
 

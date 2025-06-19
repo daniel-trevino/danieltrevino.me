@@ -57,6 +57,8 @@ Daniel is originally from Mexico but has been living in Sweden since January 201
 ## Professional Experience
 
 ### Aigent | Founder
+Website: https://aigent.sh
+Logo: https://static.dezeen.com/uploads/2025/05/sq-google-g-logo-update_dezeen_2364_col_0-852x852.jpg
 *March 2025 - Present*
 
 Daniel's current professional role involves founding and leading Aigent.sh, a cutting-edge SaaS company specializing in custom AI agent development for productivity enhancement. This entrepreneurial venture showcases Daniel's professional experience in building scalable AI-powered platforms from the ground up. The company's core product enables users to create sophisticated agentic solutions with seamless integration capabilities.
