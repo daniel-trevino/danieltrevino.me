@@ -28,7 +28,7 @@ COPY apps/api ./apps/api
 RUN pnpm install --frozen-lockfile
 
 # Build the app
-RUN pnpm build
+RUN pnpm --filter ./apps/api... run build
 
 FROM base AS prod
 
