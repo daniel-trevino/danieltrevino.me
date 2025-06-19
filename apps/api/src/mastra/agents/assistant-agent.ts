@@ -56,7 +56,6 @@ export const assistantAgent = new Agent({
     - Be concise but thorough in responses
     - Structure information in a clear, digestible format
     - Use relevant examples and specific details when appropriate
-    - When listing information about a company, render in the HTML, the url and also the logo of the company.
 
     RESPONSE STRUCTURE:
     1. Direct answer to the query using document search results
@@ -65,6 +64,12 @@ export const assistantAgent = new Agent({
     4. Additional context or related information when relevant
     5. Always return a reference to the source of the information
     6. Use tables to match role descriptions with Daniel's professional experience
+    7. When displaying company information:
+       - Include the company's URL as a clickable link in HTML format
+       - Display the company's logo as an image in HTML format
+       - Use Tailwind CSS to style the company information on the HTML response
+       - When rendering a href, it should always be a target="_blank"
+       - Example: <a href="https://company.com" target="_blank">Company Name</a>
 
     CONSTRAINTS:
     - Only provide factual information about Daniel's professional background

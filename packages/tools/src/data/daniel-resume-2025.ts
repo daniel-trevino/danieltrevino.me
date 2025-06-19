@@ -58,7 +58,6 @@ Daniel is originally from Mexico but has been living in Sweden since January 201
 
 ### Aigent | Founder
 Website: https://aigent.sh
-Logo: https://static.dezeen.com/uploads/2025/05/sq-google-g-logo-update_dezeen_2364_col_0-852x852.jpg
 *March 2025 - Present*
 
 Daniel's current professional role involves founding and leading Aigent.sh, a cutting-edge SaaS company specializing in custom AI agent development for productivity enhancement. This entrepreneurial venture showcases Daniel's professional experience in building scalable AI-powered platforms from the ground up. The company's core product enables users to create sophisticated agentic solutions with seamless integration capabilities.
@@ -74,6 +73,7 @@ Daniel's current professional role involves founding and leading Aigent.sh, a cu
 **Technologies Used:** TypeScript, React, Next.js, Turborepo, Tailwind CSS, Shadcn, tRPC, Jest, Zod, Hono, Docker, Mastra, ElizaOS, Playwright, OpenAI, Anthropic, Deepseek, Vercel, Coolify
 
 ### OX2 | Integration Developer (Consultant)
+Website: https://ox2.com
 *October 2024 - Present*
 
 Daniel's professional experience at OX2, one of Europe's largest onshore wind power developers, involves leading critical integration initiatives for renewable energy solutions. This consulting role demonstrates his expertise in enterprise-level system integration and his ability to work in complex regulatory environments within the energy sector.
@@ -91,6 +91,7 @@ Daniel's professional experience at OX2, one of Europe's largest onshore wind po
 
 
 ### Tre | Frontend Developer Lead (Consultant)
+Website: https://tre.se
 *October 2022 - October 2024*
 
 Daniel's professional experience as Frontend Developer Lead at Tre Sverige showcased his exceptional leadership capabilities in managing large-scale development teams within the telecommunications industry. This senior role involved overseeing frontend development operations for a platform serving over 2 million customers across Sweden, making it one of Daniel's most impactful professional experiences in team leadership and technical architecture.
@@ -109,6 +110,7 @@ Daniel's professional experience as Frontend Developer Lead at Tre Sverige showc
 **Technologies Used:** TypeScript, React, Next.js, Node.js, Tailwind CSS, Azure, CircleCI, Contentful CMS, REST APIs, GitHub Actions, Jest, Zod, Optimizely, GraphQL, Kubernetes, Styled Components, Vercel
 
 ### Tre | Senior Web Developer (Consultant)
+Website: https://tre.se
 *August 2022 - October 2022*
 
 Hi3G Access AB (Tre Sverige) is a Swedish telecommunications operator offering mobile telephony and mobile broadband services under the brands 3 and Hallon. The company serves both private and business customers and has around 2 million users in Sweden.
@@ -120,6 +122,7 @@ Hi3G Access AB (Tre Sverige) is a Swedish telecommunications operator offering m
 **Technologies Used:** Typescript, React, NextJs, NodeJs, Tailwind CSS, Azure, CircleCI, Contentful, REST, Github Actions, Jest, Zod, Optimizely, GraphQL, Kubernetes, Styled Components, Vercel
 
 ### prePO | Principal Web3 Frontend Engineer (Consultant)
+Website: https://prepo.io
 *September 2021 - July 2022*
 
 Daniel's professional experience as Principal Web3 Frontend Engineer at prePO demonstrated his expertise in cutting-edge blockchain technology and decentralized finance (DeFi) development. This senior role involved architecting and developing complex Web3 applications for trading synthetic exposure to pre-IPO companies and pre-token crypto projects, showcasing Daniel's professional experience in emerging financial technologies.
@@ -140,6 +143,7 @@ Daniel's professional experience as Principal Web3 Frontend Engineer at prePO de
 **Technologies Used:** Ethers.js, TypeScript, Node.js, Next.js, Vercel, Tailwind CSS, Styled Components, Turborepo, GraphQL, GitHub Actions, Jest, MobX, Storybook, MetaMask, Web3 Wallets
 
 ### Black Dragon | Senior Web3 Developer (Consultant)
+Website: https://blackdragon.io
 *June 2021 - July 2021*
 
 BlackDragon is a decentralized investment platform that provides community-backed access to early-stage crypto projects through a token-based, pro-rata allocation system.
@@ -149,6 +153,7 @@ BlackDragon is a decentralized investment platform that provides community-backe
 **Technologies Used:** Ethers.js, Typescript, NextJs, GraphQL, The Graph, Metamask
 
 ### Zettle by PayPal | Senior Web Developer (Consultant)
+Website: https://zettle.com
 *January 2021 - February 2022*
 
 Zettle by PayPal is a Swedish financial technology company that provides point-of-sale and payment solutions for small businesses, enabling them to accept in-person payments and manage sales through integrated hardware and software tools.
@@ -162,6 +167,7 @@ Zettle by PayPal is a Swedish financial technology company that provides point-o
 **Technologies Used:** Typescript, NodeJs, React, NextJs, Vue, Heroku, AWS, Styled Components, Lerna, Github ACtions, Jest, Koa, Storyblock CMS, Storybook, REST
 
 ### Tre | Senior Frontend Developer
+Website: https://tre.se
 *February 2020 - January 2021*
 
 Hi3G Access AB (Tre Sverige) is a Swedish telecommunications operator offering mobile telephony and mobile broadband services under the brands 3 and Hallon. The company serves both private and business customers and has around 2 million users in Sweden.
@@ -174,6 +180,7 @@ Hi3G Access AB (Tre Sverige) is a Swedish telecommunications operator offering m
 **Technologies Used:** Typescript, NodeJs, Gatsby, NextJs, Styled Components, Lerna, Jest, Github Actions, Express, GraphQL, Storybook, Kubernetes, CircleCI, Azure, REST
 
 ### Cabonline Technologies | Senior Frontend Developer
+Website: https://cabonline.com
 *August 2018 - February 2022*
 
 Cabonline is the largest taxi network in the Nordics, offering digital ride hailing and fleet management services across Sweden, Norway, and Finland through a network of affiliated transporters and well known local taxi brands.
@@ -185,6 +192,7 @@ Cabonline is the largest taxi network in the Nordics, offering digital ride hail
 **Technologies Used:** Typescript, NodeJs, React, NextJs, Webpack, Heroku, AWS, MobX, Flow, Jenkins, Strapi CMS, Storybook, REST, Styled Components
 
 ### Occident in Sweden | Fullstack Developer
+Website: https://occident.se
 *January 2015 - August 2018*
 
 Occident in Sweden AB is a Swedish consultancy specializing in digital project management, data migration, and digital preservation, serving both private and public sector clients.
@@ -197,11 +205,13 @@ Occident in Sweden AB is a Swedish consultancy specializing in digital project m
 **Technologies Used:** NodeJs, React, Webpack, ASP.NET, REST, SOAP, Redux, Buddy, Mocha, Saas, PHP
 
 ### General Electric | System Developer (Internship)
+Website: https://www.ge.com/
 *June 2014 - July 2014*
 
 - Used Lean and Six Sigma methodologies to analyze processes that were ineffective. Improved an internal project management application by adding new features using PHP.
 
 ### T-Systems | Software Analyst (Internship)
+Website: https://www.t-systems.com/mx/es
 *January 2014 - May 2014*
 
 - User experience, documentation and planning of projects that were created for the company. Creation of prototypes and user case diagrams.
@@ -211,9 +221,11 @@ Occident in Sweden AB is a Swedish consultancy specializing in digital project m
 
 ### Computer Systems Engineering
 **Universidad de las Américas Puebla** | *July 2010 - December 2014*
+Website: https://www.udlap.mx/
 
 ### Exchange Program. Computer Science Courses.
 **Uppsala University** | *June 2012 - June 2013*
+Website: https://www.uu.se/
 
 ## Languages
 
