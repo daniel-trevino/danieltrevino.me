@@ -8,7 +8,7 @@ import {
     getXUrl
 } from "@repo/tools";
 import { showContactForm } from "@repo/tools/show-contact-form";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { memory } from "../lib/memory";
 import { crawlWebpageTool } from "../tools/crawl-webpage";
@@ -29,6 +29,25 @@ const mcp = new MCPClient({
         // },
     },
 });
+
+function getCvPath() {
+    // Docker path
+    const dockerPath = path.join(process.cwd(), "src", "data", "daniel-cv-2025.md");
+    if (existsSync(dockerPath)) return dockerPath;
+
+    // Local dev path (run from monorepo root)
+    const monorepoPath = path.join(process.cwd(), "apps", "api", "src", "data", "daniel-cv-2025.md");
+    if (existsSync(monorepoPath)) return monorepoPath;
+
+    // Local dev path (run from apps/api)
+    const localApiPath = path.join(process.cwd(), "..", "..", "src", "data", "daniel-cv-2025.md");
+    if (existsSync(localApiPath)) return localApiPath;
+
+    throw new Error("daniel-cv-2025.md not found in any known location");
+}
+
+// Usage:
+const cvContent = readFileSync(getCvPath(), "utf8");
 
 export const assistantAgent = new Agent({
     name: "Assistant Agent",
@@ -82,7 +101,7 @@ export const assistantAgent = new Agent({
 
 
     DANIEL'S CV:
-    ${readFileSync(path.join(process.cwd(), "..", "..", "src", "data", "daniel-cv-2025.md"), "utf8")}
+    ${cvContent}
     `,
     model: openai("gpt-4o-mini"),
     memory,
