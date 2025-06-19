@@ -1,3 +1,4 @@
+export const danielResume2025Markdown = `
 # Daniel Treviño Bergman
 
 Senior Software Engineer
@@ -228,3 +229,4 @@ Occident in Sweden AB is a Swedish consultancy specializing in digital project m
 
 *Last Updated: June 2025*
 *Available for: Full-time positions, Contract work, Consulting* 
+`;
