@@ -45,6 +45,9 @@ RUN pnpm install --frozen-lockfile --prod --filter ./apps/api...
 # Copy built output from builder
 COPY --from=builder /app/apps/api/.mastra /app/apps/api/.mastra
 
+# Explicitly copy the data directory to ensure CV file is available
+COPY apps/api/src/data ./src/data
+
 # Set environment variables
 ENV NODE_ENV=production
 ENV PORT=4000
