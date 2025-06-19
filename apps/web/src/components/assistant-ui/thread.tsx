@@ -116,6 +116,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 		"What is his tech stack?",
 		"Give me his resume",
 		"Give me his socials",
+		"I want to contact him",
 	];
 
 	const container = {
@@ -133,9 +134,9 @@ const ThreadWelcomeSuggestions: FC = () => {
 		show: { opacity: 1, x: 0 },
 	};
 
-	if (suggestions.length === 5) {
+	if (suggestions.length === 6) {
 		const firstRow = suggestions.slice(0, 3);
-		const secondRow = suggestions.slice(3);
+		const secondRow = suggestions.slice(3, 6);
 		return (
 			<div className="flex flex-col gap-4 w-full items-center">
 				<motion.div

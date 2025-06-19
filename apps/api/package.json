@@ -8,13 +8,7 @@
     "dev": "mastra dev",
     "build": "mastra build",
     "check-types": "tsc --noEmit",
-    "test": "jest --detectOpenHandles",
-    "test:rag": "jest src/rag-system/tests/rag-evaluation.test.ts --verbose",
-    "rag-process-docs": "pnpm exec tsx src/rag-system/process-documents.ts",
-    "rag-stats": "pnpm exec tsx src/rag-system/process-documents.ts --stats",
-    "rag-test": "pnpm exec tsx src/rag-system/process-documents.ts --test",
-    "rag-clear": "pnpm exec tsx src/rag-system/process-documents.ts --clear",
-    "rag-evaluate": "pnpm exec tsx src/rag-system/evaluate-rag.ts"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "@ai-sdk/deepseek": "^0.2.14",
@@ -24,7 +18,6 @@
     "@mastra/mcp": "^0.10.4",
     "@mastra/memory": "^0.10.4",
     "@mastra/pg": "^0.11.0",
-    "@mastra/rag": "^1.0.0",
     "@repo/logger": "workspace:*",
     "@repo/tools": "workspace:*",
     "ai": "^4.0.0",
