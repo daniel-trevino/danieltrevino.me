@@ -1,3 +1,4 @@
+import { resumeMarkdown } from '@repo/resume';
 import { getGithubUrl, getLinkedinUrl, getResumeUrl, getXUrl } from '@repo/tools';
 import { createMcpHandler } from '@vercel/mcp-adapter';
 
@@ -48,6 +49,16 @@ const handler = createMcpHandler(
       async () => {
         return {
           content: [{ type: 'text', text: getResumeUrl?.output?.url as string }],
+        };
+      }
+    )
+    server.tool(
+      "resume_markdown_resource",
+      "Returns the markdown content of Daniel's resume",
+      {},
+      async () => {
+        return {
+          content: [{ type: 'text', text: resumeMarkdown }],
         };
       }
     )

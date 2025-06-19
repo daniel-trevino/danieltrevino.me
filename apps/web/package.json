@@ -21,6 +21,7 @@
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.7",
+    "@repo/resume": "workspace:*",
     "@repo/tools": "workspace:*",
     "@tanstack/react-query": "^5.80.7",
     "@types/nodemailer": "^6.4.17",

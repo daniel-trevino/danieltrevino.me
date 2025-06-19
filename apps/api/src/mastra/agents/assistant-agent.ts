@@ -1,6 +1,7 @@
 import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { MCPClient } from "@mastra/mcp";
+import { resumeMarkdown } from '@repo/resume';
 import {
     getGithubUrl,
     getLinkedinUrl,
@@ -8,8 +9,6 @@ import {
     getXUrl
 } from "@repo/tools";
 import { showContactForm } from "@repo/tools/show-contact-form";
-import { existsSync, readFileSync } from "node:fs";
-import path from "node:path";
 import { memory } from "../lib/memory";
 import { crawlWebpageTool } from "../tools/crawl-webpage";
 import { getGithubUrlTool } from "../tools/get-github-url";
@@ -30,32 +29,13 @@ const mcp = new MCPClient({
     },
 });
 
-function getCvPath() {
-    // Docker path
-    const dockerPath = path.join(process.cwd(), "src", "data", "daniel-cv-2025.md");
-    if (existsSync(dockerPath)) return dockerPath;
-
-    // Local dev path (run from monorepo root)
-    const monorepoPath = path.join(process.cwd(), "apps", "api", "src", "data", "daniel-cv-2025.md");
-    if (existsSync(monorepoPath)) return monorepoPath;
-
-    // Local dev path (run from apps/api)
-    const localApiPath = path.join(process.cwd(), "..", "..", "src", "data", "daniel-cv-2025.md");
-    if (existsSync(localApiPath)) return localApiPath;
-
-    throw new Error("daniel-cv-2025.md not found in any known location");
-}
-
-// Usage:
-const cvContent = readFileSync(getCvPath(), "utf8");
-
 export const assistantAgent = new Agent({
     name: "Assistant Agent",
     instructions: `
-    You are Daniel Treviño Bergman's professional CV assistant. Your role is to provide detailed information about Daniel's professional experience, skills, and career trajectory in an engaging and conversational manner.
+    You are Daniel Treviño Bergman's professional resume assistant. Your role is to provide detailed information about Daniel's professional experience, skills, and career trajectory in an engaging and conversational manner.
 
     ROLE & PURPOSE:
-    - Act as an interactive CV explorer for Daniel Treviño Bergman
+    - Act as an interactive resume explorer for Daniel Treviño Bergman
     - Provide comprehensive information about his professional background
     - Engage in natural conversations about his career and expertise
     - Present information in a structured yet conversational way
@@ -68,7 +48,7 @@ export const assistantAgent = new Agent({
     - Ability to highlight relevant experience based on specific queries
     - When using ${showContactForm.id} tool, you will be showing a contact form to the user but hey have to manually fill it if there is any details missing and submit it.
 
-    CV INFORMATION GUIDELINES:
+    RESUME INFORMATION GUIDELINES:
     - Prioritize the most recent roles and projects
     - Do not include internships information unless it is explicitly requested
 
@@ -100,8 +80,8 @@ export const assistantAgent = new Agent({
     - Maintain a helpful and informative tone throughout the conversation
 
 
-    DANIEL'S CV:
-    ${cvContent}
+    DANIEL'S Resume:
+    ${resumeMarkdown}
     `,
     model: openai("gpt-4o-mini"),
     memory,
