@@ -17,6 +17,7 @@ import {
 	HardDriveIcon,
 	MoonIcon,
 	MoreVerticalIcon,
+	SettingsIcon,
 	SunIcon
 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -50,10 +51,13 @@ export function UserMenu() {
 			<DropdownMenuTrigger asChild>
 				<button
 					type="button"
-					className="flex w-full items-center justify-between gap-2 rounded-md outline-hidden focus-visible:ring-2 focus-visible:ring-primary md:w-[100%+1rem] md:hover:bg-primary/5 cursor-pointer px-4 py-2"
+					className="flex w-full items-center justify-between gap-2 rounded-md outline-hidden focus-visible:ring-2 focus-visible:ring-primary md:w-[100%+1rem] md:hover:bg-primary/5 cursor-pointer p-2 text-sm"
 					aria-label="User menu"
 				>
-					Settings
+					<div className="flex items-center gap-2">
+						<SettingsIcon className="size-4" />
+						Settings
+					</div>
 					<MoreVerticalIcon className="size-4" />
 				</button>
 			</DropdownMenuTrigger>
