@@ -158,6 +158,15 @@ export default function AboutPage() {
 					</ul>
 				</div>
 			</section>
+
+			<footer className="text-center text-sm text-muted-foreground">
+				<p>
+					Last Updated {new Date().getFullYear()} {" "}
+				</p>
+				<Link href="/" className="text-primary font-bold hover:underline">
+					Daniel Treviño Bergman
+				</Link>
+			</footer>
 		</div>
 	);
 }
