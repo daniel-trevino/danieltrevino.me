@@ -31,7 +31,7 @@
     "preset": "@repo/jest-presets/node"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.0",
+    "@biomejs/biome": "1.9.4",
     "@jest/globals": "30.0.0",
     "@repo/jest-presets": "workspace:*",
     "@repo/typescript-config": "workspace:*",

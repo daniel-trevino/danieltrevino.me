@@ -1,5 +1,10 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { mcpServerTools } from '@repo/tools';
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/components/ui/accordion";
+import { mcpServerTools } from "@repo/tools";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -73,7 +78,9 @@ export default function AboutPage() {
 
 					{/* MCP Tools List */}
 					<div className="mt-6">
-						<p className="font-semibold text-lg text-foreground mb-2">Available Tools:</p>
+						<p className="font-semibold text-lg text-foreground mb-2">
+							Available Tools:
+						</p>
 						<Accordion type="single" collapsible>
 							{mcpServerTools.map((tool) => (
 								<AccordionItem key={tool.id} value={tool.id}>
@@ -160,9 +167,7 @@ export default function AboutPage() {
 			</section>
 
 			<footer className="text-center text-sm text-muted-foreground">
-				<p>
-					Last Updated {new Date().getFullYear()} {" "}
-				</p>
+				<p>Last Updated {new Date().getFullYear()} </p>
 				<Link href="/" className="text-primary font-bold hover:underline">
 					Daniel Treviño Bergman
 				</Link>
