@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useAnalytics } from "@/services/analytics";
 import { motion } from "motion/react";
+import { ShineBorder } from "../magicui/shine-border";
 import { WordRotate } from "../magicui/word-rotate";
 import { ToolFallback } from "./tool-fallback";
 
@@ -156,7 +157,9 @@ const ThreadWelcomeSuggestions: FC = () => {
 								prompt={prompt}
 								method="replace"
 								autoSend
-								onClick={() => trackEvent('prompt_suggestion_clicked', { prompt })}
+								onClick={() =>
+									trackEvent("prompt_suggestion_clicked", { prompt })
+								}
 							>
 								<span className="line-clamp-2 text-ellipsis text-sm font-semibold">
 									{prompt}
@@ -228,15 +231,23 @@ const Composer: FC = () => {
 	const isMobile = useIsMobile();
 
 	return (
-		<ComposerPrimitive.Root className="focus-within:border-ring/20 flex w-full flex-wrap items-end rounded-lg border bg-inherit px-2.5 shadow-sm transition-colors ease-in">
-			<ComposerPrimitive.Input
-				rows={1}
-				autoFocus={!isMobile}
-				placeholder="Write a message..."
-				className="placeholder:text-muted-foreground max-h-40 flex-grow resize-none border-none bg-transparent px-2 py-4 sm:text-sm text-base outline-none focus:ring-0 disabled:cursor-not-allowed"
-			/>
-			<ComposerAction />
-		</ComposerPrimitive.Root>
+		<div className="relative w-full">
+			<ComposerPrimitive.Root className="focus-within:border-ring/20 flex w-full flex-wrap items-end rounded-lg border bg-inherit px-2.5 shadow-sm transition-colors ease-in">
+				<ComposerPrimitive.Input
+					rows={1}
+					autoFocus={!isMobile}
+					placeholder="Write a message..."
+					className="placeholder:text-muted-foreground max-h-40 flex-grow resize-none border-none bg-transparent px-2 py-4 sm:text-sm text-base outline-none focus:ring-0 disabled:cursor-not-allowed"
+				/>
+				<ComposerAction />
+			</ComposerPrimitive.Root>
+			<ThreadPrimitive.If running>
+				<ShineBorder
+					shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+					className="rounded-lg"
+				/>
+			</ThreadPrimitive.If>
+		</div>
 	);
 };
 
