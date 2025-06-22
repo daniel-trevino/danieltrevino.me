@@ -43,7 +43,7 @@ importers:
         version: 0.10.4(@mastra/core@0.10.6)(react@19.1.0)
       '@mastra/pg':
         specifier: ^0.11.0
-        version: 0.11.0(@mastra/core@0.10.6)(pg-query-stream@4.10.2)
+        version: 0.11.0(@mastra/core@0.10.6)(pg-query-stream@4.8.1)
       '@repo/logger':
         specifier: workspace:*
         version: link:../../packages/logger
@@ -1356,7 +1356,6 @@ packages:
   /@biomejs/biome@1.9.4:
     resolution: {integrity: sha512-1rkd7G70+o9KkTn5KLmDYXihGoTaIGO9PIIN2ZB7UJxFrWw04CZHPYiMRjYsaDvVV7hP1dYNRLxSANLaBFGpog==}
     engines: {node: '>=14.21.3'}
-    hasBin: true
     requiresBuild: true
     optionalDependencies:
       '@biomejs/cli-darwin-arm64': 1.9.4
@@ -2657,7 +2656,7 @@ packages:
       - react
     dev: false
 
-  /@mastra/pg@0.11.0(@mastra/core@0.10.6)(pg-query-stream@4.10.2):
+  /@mastra/pg@0.11.0(@mastra/core@0.10.6)(pg-query-stream@4.8.1):
     resolution: {integrity: sha512-/pz0wgg5ST5hJSkxEIy8hQvziTMiL+8gx+XQXDMxJ1Qi+Re+c6Ix0iTjtV9GmE4pR2Lya0peuWRZcFcUMB8O8g==}
     peerDependencies:
       '@mastra/core': '>=0.10.4-0 <0.11.0'
@@ -2665,7 +2664,7 @@ packages:
       '@mastra/core': 0.10.6(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67)
       async-mutex: 0.5.0
       pg: 8.16.0
-      pg-promise: 11.14.0(pg-query-stream@4.10.2)
+      pg-promise: 11.14.0(pg-query-stream@4.8.1)
       xxhash-wasm: 1.1.0
     transitivePeerDependencies:
       - pg-native
@@ -6232,7 +6231,6 @@ packages:
 
   /@vercel/mcp-adapter@0.11.1(@modelcontextprotocol/sdk@1.13.0)(next@15.3.4):
     resolution: {integrity: sha512-6IUuBSrHhc4nn4g/B64LCPDJGAQsChs60HKSzcifkQd7/0bgiIwAQ29ap6FdFHwYvRsXC4UcVPRcBUxhK9PsgQ==}
-    hasBin: true
     peerDependencies:
       '@modelcontextprotocol/sdk': ^1.12.0
       next: '>=13.0.0'
@@ -6586,7 +6584,6 @@ packages:
   /bunchee@6.5.3(typescript@5.8.3):
     resolution: {integrity: sha512-TE5iAUjeO6gyIPVbHm0jSyrDHs8c7J+JGCbHfA5mtgcBYr5WAuUADA6g6zj7T8yudvpM+wOc8RIPMWuzXu6VIw==}
     engines: {node: '>= 18.0.0'}
-    hasBin: true
     peerDependencies:
       typescript: ^4.1 || ^5.0
     peerDependenciesMeta:
@@ -7407,7 +7404,6 @@ packages:
   /esprima@4.0.1:
     resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
     engines: {node: '>=4'}
-    hasBin: true
 
   /estree-util-is-identifier-name@3.0.0:
     resolution: {integrity: sha512-hFtqIDZTIUZ9BXLb8y4pYGyk6+wekIivNVTcmvk8NoOh+VeRn5y6cEHzbURrWbfp1fIqdVipilzj+lfaadNZmg==}
@@ -7877,7 +7873,6 @@ packages:
 
   /glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
@@ -8116,7 +8111,6 @@ packages:
   /import-local@3.2.0:
     resolution: {integrity: sha512-2SPlun1JUPWoM6t3F0dw0FkCF/jWY8kttcY4f599GLTSjh2OCuuhdTkJQsEcZzBqbXZGKMK2OqW1oZsjtf/gQA==}
     engines: {node: '>=8'}
-    hasBin: true
     dependencies:
       pkg-dir: 4.2.0
       resolve-cwd: 3.0.0
@@ -8127,7 +8121,6 @@ packages:
 
   /inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
-    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
@@ -8390,7 +8383,6 @@ packages:
   /jest-cli@30.0.2(@types/node@24.0.3):
     resolution: {integrity: sha512-yQ6Qz747oUbMYLNAqOlEby+hwXx7WEJtCl0iolBRpJhr2uvkBgiVMrvuKirBc8utwQBnkETFlDUkYifbRpmBrQ==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
-    hasBin: true
     peerDependencies:
       node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
     peerDependenciesMeta:
@@ -8741,7 +8733,6 @@ packages:
   /jest@30.0.2(@types/node@24.0.3):
     resolution: {integrity: sha512-HlSEiHRcmTuGwNyeawLTEzpQUMFn+f741FfoNg7RXG2h0WLJKozVCpcQLT0GW17H6kNCqRwGf+Ii/I1YVNvEGQ==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
-    hasBin: true
     peerDependencies:
       node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
     peerDependenciesMeta:
@@ -8781,7 +8772,6 @@ packages:
 
   /js-yaml@3.14.1:
     resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
-    hasBin: true
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
@@ -9081,7 +9071,6 @@ packages:
 
   /mastra@0.10.6(@mastra/core@0.10.6)(@opentelemetry/api@1.9.0)(react@19.1.0)(typescript@5.8.3):
     resolution: {integrity: sha512-LPvCv5e8xLCFuvw8rUgpVm31KkvgLvV4pCoyHRJEp0ZpIiZF4Z8d1q7e3WsECru/ghib2G31VLMeEV/4FuI7Dg==}
-    hasBin: true
     peerDependencies:
       '@mastra/core': ^0.10.2-alpha.0
     dependencies:
@@ -9741,7 +9730,6 @@ packages:
   /next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0)(react@19.1.0):
     resolution: {integrity: sha512-mHKd50C+mCjam/gcnwqL1T1vPx/XQNFlXqFIVdgQdVAFY9iIQtY0IfaVflEYzKiqjeA7B0cYYMaCrmAYFjs4rA==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
-    hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
       '@playwright/test': ^1.41.2
@@ -10058,7 +10046,7 @@ packages:
       pg: 8.16.2
     dev: false
 
-  /pg-promise@11.14.0(pg-query-stream@4.10.2):
+  /pg-promise@11.14.0(pg-query-stream@4.8.1):
     resolution: {integrity: sha512-x/HZ6hK0MxYllyfUbmN/XZc7JBYoow7KElyNW9hnlhgRHMiRZmRUtfNM/wcuElpjSoASPxkoIKi4IA5QlwOONA==}
     engines: {node: '>=14.0'}
     peerDependencies:
@@ -10067,7 +10055,7 @@ packages:
       assert-options: 0.8.3
       pg: 8.14.1
       pg-minify: 1.7.0
-      pg-query-stream: 4.10.2(pg@8.14.1)
+      pg-query-stream: 4.8.1(pg@8.14.1)
       spex: 3.4.1
     transitivePeerDependencies:
       - pg-native
@@ -10079,8 +10067,8 @@ packages:
   /pg-protocol@1.10.2:
     resolution: {integrity: sha512-Ci7jy8PbaWxfsck2dwZdERcDG2A0MG8JoQILs+uZNjABFuBuItAZCWUNz8sXRDMoui24rJw7WlXqgpMdBSN/vQ==}
 
-  /pg-query-stream@4.10.2(pg@8.14.1):
-    resolution: {integrity: sha512-04SbGL5/ENbF1OCQrVbq1vCKpNtRrfaI9bCiRXb4FLRalW9GSC0hZXnBMgGQqNPdzxYF36js8WCW6QABvOqlIg==}
+  /pg-query-stream@4.8.1(pg@8.14.1):
+    resolution: {integrity: sha512-kZo6C6HSzYFF6mlwl+etDk5QZD9CMdlHUXpof6PkK9+CHHaBLvOd2lZMwErOOpC/ldg4thrAojS8sG1B8PZ9Yw==}
     peerDependencies:
       pg: ^8
     dependencies:
@@ -11377,7 +11365,6 @@ packages:
 
   /tldts@6.1.86:
     resolution: {integrity: sha512-WMi/OQ2axVTf/ykqCQgXiIct+mSQDFdH2fkwhPwgEwvJ1kSzZRiinb0zF2Xb8u4+OqPChmyI6MEu4EezNJz+FQ==}
-    hasBin: true
     dependencies:
       tldts-core: 6.1.86
     dev: true
@@ -11438,7 +11425,6 @@ packages:
   /ts-jest@29.4.0(@babel/core@7.27.4)(jest@30.0.2)(typescript@5.8.3):
     resolution: {integrity: sha512-d423TJMnJGu80/eSgfQ5w/R+0zFJvdtTxwtF9KzFFunOpSeD+79lHJQIiAhluJoyGRbvj9NZJsl9WjCUo0ND7Q==}
     engines: {node: ^14.15.0 || ^16.10.0 || ^18.0.0 || >=20.0.0}
-    hasBin: true
     peerDependencies:
       '@babel/core': '>=7.0.0-beta.0 <8'
       '@jest/transform': ^29.0.0 || ^30.0.0
@@ -11485,7 +11471,6 @@ packages:
   /tsup@8.5.0(tsx@4.20.3)(typescript@5.8.3):
     resolution: {integrity: sha512-VmBp77lWNQq6PfuMqCHD3xWl22vEoWsKajkF8t+yMBawlUS8JzEI+vOVMeuNZIuMML8qXRizFKi9oD5glKQVcQ==}
     engines: {node: '>=18'}
-    hasBin: true
     peerDependencies:
       '@microsoft/api-extractor': ^7.36.0
       '@swc/core': ^1
@@ -11739,7 +11724,6 @@ packages:
 
   /update-browserslist-db@1.1.3(browserslist@4.25.0):
     resolution: {integrity: sha512-UxhIZQ+QInVdunkDAaiazvvT/+fXL5Osr0JZlJulepYu6Jd7qJtDZjlur0emRlT71EN3ScPoE7gvsuIKKNavKw==}
-    hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
