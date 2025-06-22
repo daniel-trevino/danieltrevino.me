@@ -6,6 +6,7 @@ This is the repository for my personal website, which is an AI Agent built with 
 
 - [Mastra](https://mastra.ai)
 - [Next.js](https://nextjs.org)
+- [Assistant UI](https://assistant-ui.com)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Shadcn UI](https://ui.shadcn.com)
 - [Lucide](https://lucide.dev)
