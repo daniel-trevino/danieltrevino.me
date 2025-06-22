@@ -84,7 +84,9 @@ export default function AboutPage() {
 						<Accordion type="single" collapsible>
 							{mcpServerTools.map((tool) => (
 								<AccordionItem key={tool.id} value={tool.id}>
-									<AccordionTrigger>{tool.id}</AccordionTrigger>
+									<AccordionTrigger className="cursor-pointer">
+										{tool.id}
+									</AccordionTrigger>
 									<AccordionContent>{tool.description}</AccordionContent>
 								</AccordionItem>
 							))}
