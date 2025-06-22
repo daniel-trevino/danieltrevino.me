@@ -166,6 +166,27 @@ export default function AboutPage() {
 				</div>
 			</section>
 
+			<section className="space-y-2">
+				<h2 className="text-3xl font-bold text-foreground mb-4">
+					How is this site built
+				</h2>
+				<p className="text-base leading-relaxed text-muted-foreground">
+					This website is open-source.
+				</p>
+				<p className="text-base leading-relaxed text-muted-foreground">
+					You can find the code on{" "}
+					<Link
+						href="https://github.com/daniel-trevino/danieltrevino.me"
+						className="text-primary font-bold hover:underline"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						GitHub
+					</Link>
+					. Feel free to explore, open issues, or contribute.
+				</p>
+			</section>
+
 			<footer className="text-center text-sm text-muted-foreground">
 				<p>Last Updated {new Date().getFullYear()} </p>
 				<Link href="/" className="text-primary font-bold hover:underline">
