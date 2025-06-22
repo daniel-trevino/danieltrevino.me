@@ -94,7 +94,7 @@ const ThreadScrollToBottom: FC = () => {
 
 const ThreadWelcome: FC = () => {
 	const messages = [
-		"Your shortcut to understanding my qualifications.",
+		"Learn about my qualifications.",
 		"Curious about my background? Start a chat.",
 		"Everything you need to know—one message away.",
 		"Want to know what I've worked on?",
