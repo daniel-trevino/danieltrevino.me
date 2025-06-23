@@ -87,7 +87,7 @@ export const assistantAgent = new Agent({
     DANIEL'S Resume:
     ${danielResume2025Markdown}
     `,
-    model: openai("gpt-4o-mini"),
+    model: openai("gpt-4.1-mini"),
     memory,
     tools: async () => {
         const mcpTools = await mcp.getTools();
