@@ -96,7 +96,7 @@ const ThreadWelcome: FC = () => {
 	const messages = [
 		"Learn about my qualifications.",
 		"Curious about my background? Start a chat.",
-		"Everything you need to know—one message away.",
+		"Everything you need to know, one message away.",
 		"Want to know what I've worked on?",
 		"Explore my skills and story, ask anything.",
 		"Got more questions before hiring me? Ask anything.",
