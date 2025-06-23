@@ -153,7 +153,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 							className="flex-1 min-w-0 max-w-lg"
 						>
 							<ThreadPrimitive.Suggestion
-								className="hover:bg-muted/80 grid place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
+								className="hover:bg-muted/80 grid h-full place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
 								prompt={prompt}
 								method="replace"
 								autoSend
@@ -181,7 +181,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 							className="flex-1 min-w-0 max-w-lg"
 						>
 							<ThreadPrimitive.Suggestion
-								className="hover:bg-muted/80 grid place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
+								className="hover:bg-muted/80 grid h-full place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
 								prompt={prompt}
 								method="replace"
 								autoSend
@@ -212,7 +212,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 					className="flex-1 min-w-0 max-w-xs mx-auto"
 				>
 					<ThreadPrimitive.Suggestion
-						className="hover:bg-muted/80 grid place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
+						className="hover:bg-muted/80 grid h-full place-items-center rounded-lg border p-3 transition-colors ease-in cursor-pointer w-full"
 						prompt={prompt}
 						method="replace"
 						autoSend
