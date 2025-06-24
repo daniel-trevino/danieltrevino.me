@@ -121,6 +121,23 @@ Hi3G Access AB (Tre Sverige) is a Swedish telecommunications operator offering m
 
 **Technologies Used:** Typescript, React, NextJs, NodeJs, Tailwind CSS, Azure, CircleCI, Contentful, REST, Github Actions, Jest, Zod, Optimizely, GraphQL, Kubernetes, Styled Components, Vercel
 
+### Contrib | Co-Founder
+Website: https://devpost.com/software/contribute-71auhd
+*September 2021 - October 2022*
+
+Daniel was the co-founder of Contrib, a decentralized application designed to streamline how members engage with DAOs. The platform bridges the gap between governance and action, transforming passive community members into active contributors through a task board system integrated with on-chain credentials, bounties, and governance tools. By aligning DAO participation with rewards, recognition, and reputation, Contribute redefines how decentralized organizations identify and empower future core contributors. Think of it as Trello for DAOs.
+
+**Key Professional Achievements:**
+- 1st place winner at the ETH Lisbon Hackathon in 2021.
+- Designed and developed a DAO-native bounty/task platform integrating governance data from Tally and Snapshot, enabling dynamic task assignment based on real-time voting and proposals
+- Built the backend architecture using Solidity smart contracts and StandardBounties to enforce secure and transparent contribution mechanisms
+- Implemented contributor reputation and credentialing system using on-chain data, with gamification elements like XP, achievements, and leaderboards
+- Integrated multi-platform data sources and DAO tooling to support cross-DAO task discovery, reputation tracking, and project delivery pipelines
+
+**Professional Impact:** This project addressed a major friction point in DAO ecosystems by making contribution paths clearer, verifiable, and rewarding. It empowers both new and existing DAO members to build on-chain portfolios of work, helping DAOs identify high-value contributors more efficiently.
+
+**Technologies Used:** Solidity, TypeScript, Next.js, Ethers.js, The Graph, Snapshot, Tally, StandardBounties, IPFS, Node.js, Tailwind CSS
+
 ### prePO | Principal Web3 Frontend Engineer (Consultant)
 Website: https://prepo.io
 *September 2021 - July 2022*
@@ -166,6 +183,22 @@ Zettle by PayPal is a Swedish financial technology company that provides point-o
 
 **Technologies Used:** Typescript, NodeJs, React, NextJs, Vue, Heroku, AWS, Styled Components, Lerna, Github ACtions, Jest, Koa, Storyblock CMS, Storybook, REST
 
+### Kosas.mx | Founder
+*December 2019 - June 2020*
+
+Daniel developed Kosas Mx, a lightweight e-commerce link generator designed to empower non-technical sellers—particularly during the COVID-19 pandemic. To promote and sell products directly via WhatsApp and social media. Rather than relying on full-fledged online stores, users could quickly create sharable product links that functioned like a "Bitly for e-commerce," reducing technical barriers and accelerating go-to-market speed for micro-entrepreneurs and small businesses.
+
+**Key Professional Achievements:**
+- Architected and built the full-stack platform enabling users to create product listings with customized call-to-action links that opened WhatsApp chats pre-filled with product details
+- Integrated Hasura with a GraphQL-based backend to enable real-time data queries and a responsive admin dashboard with product performance analytics
+- Developed a minimal, intuitive frontend using React, Next.js, and Styled Components to ensure accessibility for non-technical users
+- Implemented product link tracking and analytics, allowing sellers to understand which items were receiving the most attention and refine their marketing strategies accordingly
+
+**Professional Impact:** 
+Kosas Mx democratized digital selling for users without technical expertise or resources to manage full e-commerce platforms. It provided a frictionless path to monetize products through familiar communication tools, especially valuable during the lockdown when traditional selling methods were disrupted.
+
+**Technologies Used:** GraphQL, Hasura, Node.js, React, Next.js, Styled Components, TypeScript, Docker, PostgreSQL.
+
 ### Tre | Senior Frontend Developer
 Website: https://tre.se
 *February 2020 - January 2021*
@@ -190,6 +223,24 @@ Cabonline is the largest taxi network in the Nordics, offering digital ride hail
 - Re-designed the web application used for customers and partners to make bookings. Maintained public sites integrating headless CMS. Set up CI/CD pipelines to reduce downtime and improve product quality using Jenkins.
 
 **Technologies Used:** Typescript, NodeJs, React, NextJs, Webpack, Heroku, AWS, MobX, Flow, Jenkins, Strapi CMS, Storybook, REST, Styled Components
+
+### Frankie | Co-founder
+Website: https://frankie.danieltrevino.se/
+*October 2017 - December 2018*
+
+Daniel co-founded Frankie, a chatbot management platform developed alongside [Mikael Gonera](https://mikaelgonera.com/) and [Abenezer Abebe](https://www.linkedin.com/in/abenezerabebe/). Frankie empowers small businesses to create and deploy AI-powered chatbots on Facebook Messenger in under five minutes, without requiring prior knowledge of machine learning. Designed to reduce customer service overhead and increase responsiveness, Frankie became a startup after starting as a personal project. While currently paused, the project reached MVP stage and served as a practical solution for small business customer engagement.
+
+**Key Professional Achievements:**
+- Designed and implemented the full system architecture, including backend services, frontend application, and DevOps infrastructure, ensuring rapid deployment and maintainability
+- Built an intuitive no-code chatbot training interface, enabling non-technical users to create domain-specific bots tailored to their business (e.g., restaurants, e-commerce, local services)
+- Integrated directly with Facebook Messenger APIs, allowing seamless chatbot deployment on existing Facebook Pages with minimal setup
+- Developed continuous learning mechanisms that allowed bots to evolve based on user interactions, with performance insights visualized in an owner-facing analytics dashboard
+- Pitched the project to investors and received feedback and mentorship from them.
+
+**Professional Impact:** 
+Frankie addressed a critical gap for small businesses unable to afford full-scale websites or dedicated customer support teams. By leveraging Facebook Messenger as a communication channel, it provided always-on support while also giving business owners actionable insights into customer behavior and pain points.
+
+**Technologies Used:** NodeJs, React, Webpack, Mocha, Facebook Messenger API, Docker, MongoDB, Javascript, Flow.
 
 ### Occident in Sweden | Fullstack Developer
 Website: https://occident.se
