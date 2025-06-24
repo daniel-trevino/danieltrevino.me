@@ -290,6 +290,14 @@ Website: https://www.uu.se/
 - **Entrepreneurship**: Trying to always have a project on the side to work.
 - **Continuous Learning**: Always exploring new technologies and frameworks
 
+## Hobbies
+
+- **Family**: Spending time with my family is a must, it help me recharge.
+- **Training**. I try to train at least 3 times a week at the Gym.
+- **Gaming**. Currently enjoying the Switch 2 while playing Zelda: Tears of the Kingdom and Mario Kart World.
+- **Singing**: Back in Mexico I had some singing classes and performed as well.
+- **Playing guitar**: It is a must have skill when you are a singer. I am self taught so not a professional but I can play and sing at a party.
+
 ---
 
 *Last Updated: June 2025*
