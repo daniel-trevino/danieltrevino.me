@@ -2,7 +2,7 @@ import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { MCPClient } from "@mastra/mcp";
 import {
-    danielResume2025Markdown, getGithubUrl,
+    danielResume2025Markdown, getDateTool, getGithubUrl,
     getLinkedinUrl,
     getResumeUrl,
     getXUrl
@@ -10,6 +10,7 @@ import {
 import { showContactForm } from "@repo/tools/show-contact-form";
 import { memory } from "../lib/memory";
 import { crawlWebpageTool } from "../tools/crawl-webpage";
+import { getDateToolMastra } from "../tools/get-date";
 import { getGithubUrlTool } from "../tools/get-github-url";
 import { getLinkedinUrlTool } from "../tools/get-linkedin-url";
 import { getResumeUrlTool } from "../tools/get-resume-url";
@@ -99,6 +100,7 @@ export const assistantAgent = new Agent({
             [getXUrl.id]: getXUrlTool,
             [getResumeUrl.id]: getResumeUrlTool,
             [showContactForm.id]: showContactFormTool,
+            [getDateTool.id]: getDateToolMastra,
             crawlWebpageTool,
         };
     },

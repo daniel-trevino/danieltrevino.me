@@ -1,4 +1,5 @@
 import { BraveWebSearchTool } from "./BraveWebSearch";
+import { GetDateTool } from "./GetDate";
 import { GetGithubUrlTool } from "./GetGithubUrlTool";
 import { GetLinkedinUrlTool } from "./GetLinkedinUrlTool";
 import { GetResumeUrlTool } from "./GetResumeUrlTool";
@@ -14,6 +15,7 @@ export const ChatTools = () => {
 			<GetGithubUrlTool />
 			<GetXUrlTool />
 			<ShowContactFormTool />
+			<GetDateTool />
 		</>
 	);
 };
