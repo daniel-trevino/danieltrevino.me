@@ -29,7 +29,7 @@ export const GetLinkedinUrlTool = makeAssistantToolUI<
 
 		return (
 			<div
-				className="rounded-lg border bg-white p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md mb-4"
+				className="rounded-lg border bg-white dark:bg-zinc-900 p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md mb-4"
 				style={{ borderColor: "#0288D1" }}
 			>
 				<div className="flex flex-col items-center justify-center mr-4">
@@ -46,7 +46,9 @@ export const GetLinkedinUrlTool = makeAssistantToolUI<
 						<Icons.linkedin className="h-6 w-6" />
 						Daniel Treviño Bergman
 					</h3>
-					<p className="text-gray-700 text-sm mb-4">Senior Software Engineer</p>
+					<p className="text-gray-700 dark:text-gray-100 text-sm mb-4">
+						Senior Software Engineer
+					</p>
 					<a
 						href={result?.url}
 						target="_blank"

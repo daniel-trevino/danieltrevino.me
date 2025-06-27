@@ -30,7 +30,7 @@ export const GetGithubUrlTool = makeAssistantToolUI<
 
 		return (
 			<div
-				className="rounded-lg border bg-white p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md mb-4"
+				className="rounded-lg border bg-white dark:bg-zinc-900 p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md mb-4"
 				style={{ borderColor: "#24292f" }}
 			>
 				<div className="flex flex-col items-center justify-center mr-4">
@@ -43,7 +43,7 @@ export const GetGithubUrlTool = makeAssistantToolUI<
 					/>
 				</div>
 				<div className="flex-1">
-					<h3 className="text-lg font-semibold text-[#24292f] flex items-center gap-2">
+					<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
 						<Icons.github className="h-6 w-6" />
 						daniel-trevino
 					</h3>

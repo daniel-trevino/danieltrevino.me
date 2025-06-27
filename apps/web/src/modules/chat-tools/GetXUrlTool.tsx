@@ -30,7 +30,7 @@ export const GetXUrlTool = makeAssistantToolUI<
 
 		return (
 			<div
-				className="rounded-lg border bg-white p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md mb-4"
+				className="rounded-lg border bg-white dark:bg-zinc-900 p-6 shadow-sm flex items-center gap-2 md:gap-6 max-w-md mb-4"
 				style={{ borderColor: "#000000" }}
 			>
 				<div className="flex flex-col items-center justify-center mr-4">
@@ -43,18 +43,26 @@ export const GetXUrlTool = makeAssistantToolUI<
 					/>
 				</div>
 				<div className="flex-1">
-					<h3 className="text-lg font-semibold text-[#000000] flex items-center gap-2">
+					<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
 						<Icons.twitter className="h-6 w-6" />
 						@danieI_trevino
 					</h3>
 					<div className="flex gap-4 mb-4">
 						<div className="flex flex-col items-center mt-2">
-							<span className="font-bold text-[#000000] text-base">356</span>
-							<span className="text-xs text-gray-500">Following</span>
+							<span className="font-bold text-[#000000] dark:text-gray-100 text-base">
+								356
+							</span>
+							<span className="text-xs text-gray-500 dark:text-gray-400">
+								Following
+							</span>
 						</div>
 						<div className="flex flex-col items-center mt-2">
-							<span className="font-bold text-[#000000] text-base">930</span>
-							<span className="text-xs text-gray-500">Followers</span>
+							<span className="font-bold text-[#000000] dark:text-gray-100 text-base">
+								930
+							</span>
+							<span className="text-xs text-gray-500 dark:text-gray-400">
+								Followers
+							</span>
 						</div>
 					</div>
 					<a

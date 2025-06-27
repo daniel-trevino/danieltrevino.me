@@ -192,7 +192,7 @@ export const ShowContactFormTool = makeAssistantToolUI<
 							className="rounded-lg border bg-zinc-50 dark:bg-zinc-900 p-6 shadow-sm"
 						>
 							<motion.h3
-								className="text-lg font-semibold text-gray-900 mb-4 dark:text-white"
+								className="text-lg font-semibold text-gray-900 mb-4 dark:text-gray-100"
 								initial={{ y: -10, opacity: 0 }}
 								animate={{ y: 0, opacity: 1 }}
 								transition={{ delay: 0.1, duration: 0.3 }}
