@@ -9,6 +9,6 @@ export const getXUrl: Tool = {
     url: z.string(),
   }),
   output: {
-    url: "https://x.com/danieI_trevino",
+    url: "https://x.com/danieltrevinob",
   },
 };

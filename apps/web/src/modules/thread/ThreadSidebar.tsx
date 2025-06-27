@@ -1,4 +1,5 @@
 "use client";
+import { UserMenu } from "@/components/UserMenu";
 import {
 	Sidebar,
 	SidebarContent,
@@ -12,7 +13,6 @@ import {
 	useSidebar,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
-import { UserMenu } from "@/components/UserMenu";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DeleteThreadForm } from "@/modules/thread/DeleteThreadForm";
 import { RenameThreadForm } from "@/modules/thread/RenameThreadForm";
@@ -132,7 +132,7 @@ export function ThreadSidebar() {
 									!Array.isArray(threads) ||
 									threads.length === 0) && (
 									<div className="px-4 py-2 text-sm text-muted-foreground">
-										There is no conversations yet
+										There are not conversations yet
 									</div>
 								)}
 							{threads &&

@@ -6,6 +6,7 @@ import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import type { z } from "zod";
 
+// TODO: Fetch data from X API.
 export const GetXUrlTool = makeAssistantToolUI<
 	z.infer<typeof getXUrl.inputSchema>,
 	z.infer<typeof getXUrl.outputSchema>
@@ -48,11 +49,11 @@ export const GetXUrlTool = makeAssistantToolUI<
 					</h3>
 					<div className="flex gap-4 mb-4">
 						<div className="flex flex-col items-center mt-2">
-							<span className="font-bold text-[#000000] text-base">357</span>
+							<span className="font-bold text-[#000000] text-base">356</span>
 							<span className="text-xs text-gray-500">Following</span>
 						</div>
 						<div className="flex flex-col items-center mt-2">
-							<span className="font-bold text-[#000000] text-base">921</span>
+							<span className="font-bold text-[#000000] text-base">930</span>
 							<span className="text-xs text-gray-500">Followers</span>
 						</div>
 					</div>

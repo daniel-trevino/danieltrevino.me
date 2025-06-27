@@ -189,10 +189,10 @@ export const ShowContactFormTool = makeAssistantToolUI<
 								ease: [0.4, 0, 0.2, 1],
 								layout: { duration: 0.3 },
 							}}
-							className="rounded-lg border bg-white p-6 shadow-sm"
+							className="rounded-lg border bg-zinc-50 dark:bg-zinc-900 p-6 shadow-sm"
 						>
 							<motion.h3
-								className="text-lg font-semibold text-gray-900 mb-4"
+								className="text-lg font-semibold text-gray-900 mb-4 dark:text-white"
 								initial={{ y: -10, opacity: 0 }}
 								animate={{ y: 0, opacity: 1 }}
 								transition={{ delay: 0.1, duration: 0.3 }}
@@ -216,7 +216,11 @@ export const ShowContactFormTool = makeAssistantToolUI<
 											<FormItem>
 												<FormLabel>Name</FormLabel>
 												<FormControl>
-													<Input placeholder="Your name" {...field} />
+													<Input
+														placeholder="Your name"
+														{...field}
+														className="bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100"
+													/>
 												</FormControl>
 												<FormMessage />
 											</FormItem>
@@ -234,6 +238,7 @@ export const ShowContactFormTool = makeAssistantToolUI<
 														type="email"
 														placeholder="your.email@example.com"
 														{...field}
+														className="bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100"
 													/>
 												</FormControl>
 												<FormMessage />
@@ -252,6 +257,7 @@ export const ShowContactFormTool = makeAssistantToolUI<
 														type="tel"
 														placeholder="Your phone number"
 														{...field}
+														className="bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100"
 													/>
 												</FormControl>
 												<FormMessage />
@@ -268,7 +274,7 @@ export const ShowContactFormTool = makeAssistantToolUI<
 												<FormControl>
 													<Textarea
 														placeholder="Your message..."
-														className="min-h-[100px]"
+														className="min-h-[100px] bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100"
 														{...field}
 													/>
 												</FormControl>
