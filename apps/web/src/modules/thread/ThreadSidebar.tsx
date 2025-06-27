@@ -132,7 +132,7 @@ export function ThreadSidebar() {
 									!Array.isArray(threads) ||
 									threads.length === 0) && (
 									<div className="px-4 py-2 text-sm text-muted-foreground">
-										There are not conversations yet
+										What are you waiting for? Ask anything about me!
 									</div>
 								)}
 							{threads &&
