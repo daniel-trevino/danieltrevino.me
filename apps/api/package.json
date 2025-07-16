@@ -25,7 +25,7 @@
     "hono": "^4.8.2",
     "jsdom": "^25.0.1",
     "mastra": "^0.10.6",
-    "napi-postinstall": "^0.2.4",
+    "napi-postinstall": "^0.3.0",
     "private-ip": "^3.0.2",
     "turndown": "^7.2.0",
     "zod": "^3.25.67"
