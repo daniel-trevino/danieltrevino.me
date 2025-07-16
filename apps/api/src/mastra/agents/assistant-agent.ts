@@ -9,7 +9,7 @@ import {
 } from '@repo/tools';
 import { showContactForm } from "@repo/tools/show-contact-form";
 import { memory } from "../lib/memory";
-import { crawlWebpageTool } from "../tools/crawl-webpage";
+import { fetchWebpageTool } from "../tools/fetch-webpage";
 import { getDateToolMastra } from "../tools/get-date";
 import { getGithubUrlTool } from "../tools/get-github-url";
 import { getLinkedinUrlTool } from "../tools/get-linkedin-url";
@@ -18,15 +18,7 @@ import { getXUrlTool } from "../tools/get-x-url";
 import { showContactFormTool } from "../tools/show-contact-form";
 
 const mcp = new MCPClient({
-    servers: {
-        // "brave-search": {
-        //     command: "npx",
-        //     args: ["-y", "@modelcontextprotocol/server-brave-search"],
-        //     env: {
-        //         BRAVE_API_KEY: process.env.BRAVE_API_KEY || "",
-        //     },
-        // },
-    },
+    servers: {},
 });
 
 export const assistantAgent = new Agent({
@@ -39,7 +31,7 @@ export const assistantAgent = new Agent({
     - Provide comprehensive information about his professional background
     - Engage in natural conversations about his career and expertise
     - Present information in a structured yet conversational way
-    - Any link that is given to you, you should use the crawl_webpage tool to crawl the url(s) and get the information you need.
+    - Any link that is given to you, you should use the fetch_webpage tool to crawl or fetch the url(s) in the format you want them and get the information you need.
 
     CORE CAPABILITIES:
     - Detailed knowledge of Daniel's professional experience through both document search and web browsing
@@ -101,7 +93,7 @@ export const assistantAgent = new Agent({
             [getResumeUrl.id]: getResumeUrlTool,
             [showContactForm.id]: showContactFormTool,
             [getDateTool.id]: getDateToolMastra,
-            crawlWebpageTool,
+            [fetchWebpageTool.id]: fetchWebpageTool,
         };
     },
 });

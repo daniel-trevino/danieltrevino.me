@@ -1,4 +1,4 @@
-import { BraveWebSearchTool } from "./BraveWebSearch";
+import { FetchWebpageTool } from "./FetchWebpageTool";
 import { GetDateTool } from "./GetDate";
 import { GetGithubUrlTool } from "./GetGithubUrlTool";
 import { GetLinkedinUrlTool } from "./GetLinkedinUrlTool";
@@ -10,7 +10,7 @@ export const ChatTools = () => {
 	return (
 		<>
 			<GetResumeUrlTool />
-			<BraveWebSearchTool />
+			<FetchWebpageTool />
 			<GetLinkedinUrlTool />
 			<GetGithubUrlTool />
 			<GetXUrlTool />
